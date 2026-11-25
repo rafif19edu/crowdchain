@@ -30,7 +30,7 @@ module needs.
 | MetaMask wallet linking (signed nonce) | Core | FR-UM-13, -14 |
 | Organisation verification application (JKM/MAIN, bank, PIC, documents) | Core (expanded per supervisor) | FR-UM-06, -07 |
 | Admin review of organisation verification | Core | FR-UM-08, -09 |
-| Registration expiry, reminder, renewal, 12-month re-verification | **Added** (from the JKM/MAIN scope) | FR-UM-10–12 |
+| Registration expiry, 30-day reminder, certificate renewal | **Added** (from the JKM/MAIN scope) | FR-UM-10, -12 |
 | Admin user management (list, suspend/unsuspend) | Core | FR-UM-15–17 |
 | Private file storage (R2, signed URLs) | Infra | NFR-SEC-06 |
 | Audit log (foundation, used by every later stage) | **Added** | FR-AU-01, -02 |

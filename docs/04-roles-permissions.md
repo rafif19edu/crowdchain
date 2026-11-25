@@ -11,7 +11,7 @@
 
 **Account states**
 - **Users:** `active`, `suspended`. An unverified email limits the account to read-only actions plus profile changes.
-- **Fundraiser organisation:** `not_submitted`, `pending`, `verified`, `rejected`, `expired`, `reverification_due`.
+- **Fundraiser organisation:** `not_submitted`, `pending`, `verified`, `rejected`, `expired`.
 
 ## 2. Permission matrix
 

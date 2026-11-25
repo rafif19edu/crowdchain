@@ -167,7 +167,7 @@ Detailed permissions: [04 Roles & Permissions](04-roles-permissions.md).
 ### 2.7 Assumptions and dependencies
 | ID | Assumption / dependency |
 |---|---|
-| A1 | Organisations registered with JKM (care centres) or MAIN (tahfiz) have a registration certificate that the admin can inspect. *To be confirmed with the supervisor:* the exact document formats and whether every MAIN certificate has an expiry date. |
+| A1 | Organisations registered with JKM (care centres) or MAIN (tahfiz) have a registration certificate that the admin can inspect. Every JKM and MAIN certificate has an expiry date (confirmed). *Still to be confirmed with the supervisor:* the exact document formats. |
 | A2 | The admin verifies documents manually and may contact the JKM district office or MAIN if in doubt. |
 | A3 | Users can install MetaMask and obtain Sepolia ETH from a public faucet. |
 | A4 | The Sepolia testnet, the RPC provider, CoinGecko, Cloudflare R2 and Brevo are available. If CoinGecko is down, the last cached rate is used. |

@@ -41,7 +41,7 @@ during evaluation and viva.
 | D-13 | A **Fundraiser must be an organisation** registered with **JKM** (care centre, Care Centres Act 1993) or a **state MAIN** (tahfiz). It is managed by one **Person In Charge (PIC)**. Individuals cannot fundraise. | Supervisor's direction. Official registration makes admin verification reliable. |
 | D-14 | Registration captures organisation, bank and PIC details, plus supporting documents (full list in FR-UM-06). | Gives the admin enough evidence to verify. The bank account holder name must match the organisation name. |
 | D-15 | Institution categories: Children's Home, Elderly Care, OKU, Tahfiz, Other Care Centre. | Donor filtering and profile display. |
-| D-16 | **Registration expiry:** a reminder 30 days before expiry. After expiry the status becomes "Registration Expired": no new campaigns, and active campaigns become "Under Review". If a certificate has no expiry date, the admin re-verifies every 12 months. | Keeps only currently valid organisations active. |
+| D-16 | **Registration expiry:** a reminder 30 days before expiry. After expiry the status becomes "Registration Expired": no new campaigns, and active campaigns become "Under Review". Every JKM and MAIN certificate has an expiry date, so the expiry date is mandatory at registration. | Keeps only currently valid organisations active. Supervisor confirmed that all certificates have an expiry date. |
 | D-17 | Admin user management: suspend/unsuspend and reject verification with a reason. There is **no hard delete**. A suspended fundraiser's active campaigns become "Under Review". | Records are needed for audit. |
 
 ## 3. Campaigns
@@ -117,3 +117,4 @@ during evaluation and viva.
 | D-54 | The admin dashboard uses a **"Pending Actions" queue** sorted by due date. | Weekly releases multiply admin work. |
 | D-55 | UI language is **English only**. | The evaluators and literature are in English. |
 | D-56 | **Future work:** mainnet + contract audit, integrated off-ramp, stablecoin, auto-release, multi-admin, dark mode. | Explicit scope boundary. |
+| D-57 | A user can **replace a linked wallet** only when they have no active campaign (fundraiser) and no unclaimed refund (donor). | Prevents releases or refunds from being sent to a wallet the user no longer controls. Approved after Phase 1 review. |
