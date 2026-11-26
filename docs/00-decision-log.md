@@ -118,3 +118,4 @@ during evaluation and viva.
 | D-55 | UI language is **English only**. | The evaluators and literature are in English. |
 | D-56 | **Future work:** mainnet + contract audit, integrated off-ramp, stablecoin, auto-release, multi-admin, dark mode. | Explicit scope boundary. |
 | D-57 | A user can **replace a linked wallet** only when they have no active campaign (fundraiser) and no unclaimed refund (donor). | Prevents releases or refunds from being sent to a wallet the user no longer controls. Approved after Phase 1 review. |
+| D-58 | Each approved proof is recorded on-chain in **its own admin transaction** (`recordProof`), separate from `releaseStage`. Each stage therefore needs two admin transactions. | Every proof hash appears on-chain as soon as it is approved and can be verified independently on Etherscan. This also covers the final stage, which has no following release. Approved after Phase 1 review. |

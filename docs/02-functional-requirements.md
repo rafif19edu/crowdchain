@@ -60,7 +60,7 @@
 | FR-PP-01 | Allow a fundraiser to post a **progress update** (text + up to 5 images), optionally linked to a stage. Updates are public. | M | P1, D-35 |
 | FR-PP-02 | Allow a fundraiser to submit **proof of spending** for a released stage: supplier invoice/receipt (required), a bank transfer slip from the NGO account to the supplier (required), the amount spent in RM, a description, and an exchange withdrawal statement (optional). | M | P3, D-33 |
 | FR-PP-03 | Compute the SHA-256 hash of each proof file on the server at upload time and store it with the file record. | M | P3, D-03 |
-| FR-PP-04 | Allow the admin to **approve** proof, or **reject** it with a reason (the fundraiser can resubmit). On approval, the admin's MetaMask records the proof hash on-chain (`recordProof()`). | M | P3, D-33 |
+| FR-PP-04 | Allow the admin to **approve** proof, or **reject** it with a reason (the fundraiser can resubmit). On approval, the admin's MetaMask records the proof hash on-chain (`recordProof()`). | M | P3, D-33, D-58 |
 | FR-PP-05 | Block a release request for stage N+1 until the proof for stage N is approved. | M | P3, D-34 |
 | FR-PP-06 | Flag a campaign as **Proof Overdue** publicly if proof for the final released stage is not approved within **30 days** of release. | M | P3, D-34 |
 | FR-PP-07 | Show a public **timeline** per campaign merging donations, releases, proofs, updates, extensions and status changes, with Etherscan links where applicable. | M | P1, D-36 |
