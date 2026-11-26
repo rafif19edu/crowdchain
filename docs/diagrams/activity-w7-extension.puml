@@ -1,0 +1,26 @@
+@startuml activity-w7-extension
+title W7 — Deadline Extension (Project only)
+skinparam shadowing false
+|Fundraiser|
+start
+:Request 30-day extension\nwith reason;
+|System|
+if (Project, active, before deadline,\ngoal not reached, never extended?) then (yes)
+  :extension = pending;\nadd to Pending Actions;
+else (no)
+  :Reject request;
+  stop
+endif
+|Admin|
+if (Approve?) then (yes)
+  :Sign extendDeadline(id);
+  |Ethereum|
+  :deadline += 30 days;\nemit DeadlineExtended;
+  |System|
+  :Verify; update deadline;\naudit log; notify Fundraiser;
+else (no)
+  |System|
+  :extension = rejected (reason);\nnotify Fundraiser;
+endif
+stop
+@enduml

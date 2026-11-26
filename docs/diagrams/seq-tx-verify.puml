@@ -1,0 +1,33 @@
+@startuml seq-tx-verify
+title Donation + transaction verification (fast path)
+skinparam shadowing false
+actor Donor
+participant "React SPA" as SPA
+participant MetaMask as MM
+participant "CrowdChainEscrow\n(Sepolia)" as SC
+participant "Laravel API" as API
+participant "RPC provider" as RPC
+database PostgreSQL as DB
+
+Donor -> SPA : amount RM 50
+SPA -> API : GET /rates/eth-myr
+API --> SPA : myr_per_eth
+SPA -> SPA : 50 RM -> wei; check min/max
+SPA -> MM : donate(42) value = wei
+Donor -> MM : confirm
+MM -> SC : signed transaction
+SC -> SC : checks; raised += value;\nemit DonationReceived(42, donor, value)
+MM --> SPA : txHash
+SPA -> RPC : wait for 1 confirmation (via MetaMask provider)
+SPA -> API : POST /campaigns/{ulid}/donations/confirm {tx_hash, is_anonymous}
+API -> RPC : eth_getTransactionReceipt(tx_hash)
+RPC --> API : receipt + logs
+API -> API : status == 1?\nto == CONTRACT_ADDRESS?\nlog topic == DonationReceived?\ncampaignId == 42?\ndonor == user's linked wallet?
+alt valid
+  API -> DB : BEGIN\ninsert chain_events (tx_hash, log_index) ON CONFLICT DO NOTHING\ninsert donation; recompute raised_wei; maybe status = funded\nCOMMIT
+  API -> API : recalculate Trust Score
+  API --> SPA : 201 donation
+else invalid
+  API --> SPA : 422 "Transaction could not be verified"
+end
+@enduml

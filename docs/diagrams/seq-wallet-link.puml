@@ -1,0 +1,37 @@
+@startuml seq-wallet-link
+title Wallet Linking — signed nonce (no gas)
+skinparam shadowing false
+actor User
+participant "React SPA\n(Ethers.js)" as SPA
+participant MetaMask as MM
+participant "Laravel API" as API
+database PostgreSQL as DB
+
+User -> SPA : click "Connect wallet"
+SPA -> MM : eth_requestAccounts
+MM --> SPA : 0xAbC...
+SPA -> MM : wallet_switchEthereumChain (Sepolia 11155111)
+SPA -> API : POST /wallet/nonce
+API -> DB : insert nonce (random, expires +5 min)
+API --> SPA : {nonce, message}
+note right of API
+  message =
+  "CrowdChain wallet link
+   Account: user@email
+   Nonce: 9f2c...
+   Issued: 2026-11-26T10:00Z"
+end note
+SPA -> MM : personal_sign(message)
+User -> MM : approve signature
+MM --> SPA : signature
+SPA -> API : POST /wallet/link {address, signature, nonce}
+API -> DB : nonce exists, belongs to user,\nunused, not expired?
+API -> API : recover signer from (message, signature)\n== address?
+API -> DB : address not linked to another user?
+alt all checks pass
+  API -> DB : save wallet_address; mark nonce used
+  API --> SPA : 200 wallet linked
+else any check fails
+  API --> SPA : 422 reason
+end
+@enduml

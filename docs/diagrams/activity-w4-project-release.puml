@@ -1,0 +1,48 @@
+@startuml activity-w4-project-release
+title W4 — Project Stage Release & Proof
+skinparam shadowing false
+|System|
+start
+if (Goal reached or deadline passed?) then (yes)
+else (no)
+  :Wait;
+  stop
+endif
+:finalize (on first release/claim):\ndetermine fundable stages k,\nunfunded rest, leftover -> refund pool;
+|Fundraiser|
+repeat :Request release of stage N;
+  |System|
+  if (Proof of stage N-1 approved\n(or N = first)?) then (yes)
+  else (no)
+    :Block request;
+    stop
+  endif
+  :stage = release_requested;\nadd to Pending Actions;
+  |Admin|
+  :Sign releaseStage(id, N);
+  |Ethereum|
+  :Send stage amount to\nfundraiser wallet;\nemit StageReleased;
+  |System|
+  :Verify; stage = released;\nproof due in 30 days;\nnotify Fundraiser & Donors;
+  |Fundraiser|
+  :Pay supplier (off-ramp outside system);\nupload invoice + transfer slip;
+  |System|
+  :Store files + SHA-256;\nproof_hash = sha256(invoice || slip);
+  |Admin|
+  while (Proof acceptable?) is (no)
+    :Reject with reason;
+    |Fundraiser|
+    :Resubmit proof;
+    |Admin|
+  endwhile (yes)
+  :Sign recordProof(id, N, hash);
+  |Ethereum|
+  :Store hash; emit ProofRecorded;
+  |System|
+  :proof = approved;\nrecalculate Trust Score;
+repeat while (More fundable stages?) is (yes)
+->no;
+|System|
+:status = completed;
+stop
+@enduml

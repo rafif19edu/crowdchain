@@ -1,0 +1,37 @@
+@startuml activity-w6-refund
+title W6 — Refund
+skinparam shadowing false
+start
+split
+  |Ethereum|
+  :Project deadline passed;\nraised < M1 -> refund pool = raised;
+split again
+  |Ethereum|
+  :Project deadline passed;\nM1 <= raised < goal ->\nleftover -> refund pool;
+split again
+  |Ethereum|
+  :Weekly campaign ended\nwith leftover;
+split again
+  |Admin|
+  :Cancel campaign (reason);\nsign cancelCampaign();
+  |Ethereum|
+  :refund pool = raised - released;
+end split
+|System|
+:Notify affected donors\n"Refund available";
+|Donor|
+:Open donation history;\nclick "Claim refund";
+:Sign claimRefund(id);
+|Ethereum|
+:owed = contributed x pool / raised\n- already refunded;
+if (owed > 0?) then (yes)
+  :Update refunded;\nsend ETH to donor;\nemit RefundClaimed;
+  |System|
+  :Record refund claim;
+  |Donor|
+  :See refund + Etherscan link;
+else (no)
+  :Revert;
+endif
+stop
+@enduml

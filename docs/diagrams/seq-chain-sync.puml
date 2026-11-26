@@ -1,0 +1,34 @@
+@startuml seq-chain-sync
+title chain:sync — safety-net reconciliation (every 10 min)
+skinparam shadowing false
+participant "Heroku Scheduler" as HS
+participant "php artisan chain:sync" as CMD
+participant "RPC provider" as RPC
+database PostgreSQL as DB
+
+HS -> CMD : run
+CMD -> DB : read last_block (chain_sync_cursors)
+CMD -> RPC : eth_blockNumber
+RPC --> CMD : latest
+CMD -> CMD : to = latest - 2 (confirmations)
+loop chunks of <= 5000 blocks
+  CMD -> RPC : eth_getLogs(address = contract,\nfromBlock, toBlock)
+  RPC --> CMD : logs[]
+  loop each log
+    CMD -> CMD : decode event by topic0
+    CMD -> DB : BEGIN
+    CMD -> DB : insert chain_events (tx_hash, log_index)\nON CONFLICT DO NOTHING
+    alt newly inserted
+      CMD -> DB : apply event (donation / release /\nunfunded / proof / cancel / refund / finalize)
+    else already processed (fast path saw it)
+      CMD -> CMD : skip
+    end
+    CMD -> DB : COMMIT
+  end
+  CMD -> DB : update last_block = toBlock
+end
+note over CMD
+  If RPC fails: exit non-zero;
+  cursor unchanged; next run retries.
+end note
+@enduml
