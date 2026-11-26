@@ -1,0 +1,43 @@
+@startuml deployment
+title CrowdChain — Deployment Diagram
+skinparam shadowing false
+
+node "User device" as dev {
+  artifact "Web browser\n+ MetaMask" as br
+}
+
+node "Heroku (US/EU region)" as heroku {
+  node "Web dyno (Basic)" as web {
+    artifact "Laravel app\n(public/build = React bundle)" as app
+  }
+  node "One-off dyno\n(Heroku Scheduler)" as oneoff {
+    artifact "php artisan chain:sync\nphp artisan trust:recalculate\n..." as cmds
+  }
+  database "Heroku Postgres\n(Essential)" as pg
+}
+
+node "Developer laptop (Windows)" as laptop {
+  artifact "Hardhat\n(deploy script)" as hh
+}
+
+cloud "Ethereum Sepolia testnet" as sep {
+  artifact "CrowdChainEscrow" as sc
+}
+
+cloud "Cloudflare R2" as r2
+cloud "Alchemy / Infura RPC" as rpc
+cloud "CoinGecko API" as cg
+cloud "Brevo SMTP" as brevo
+
+br --> app : HTTPS
+br --> sc : MetaMask RPC\n(signed tx)
+app --> pg : DATABASE_URL
+cmds --> pg
+app --> rpc : JSON-RPC (read)
+cmds --> rpc
+rpc --> sc
+app --> r2 : S3 API
+app --> cg : HTTPS
+app --> brevo : SMTP/TLS
+hh --> sc : one-time deploy
+@enduml
