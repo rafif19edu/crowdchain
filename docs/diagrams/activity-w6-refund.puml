@@ -1,22 +1,20 @@
 @startuml activity-w6-refund
 title W6 — Refund
 skinparam shadowing false
+|Ethereum|
 start
-split
-  |Ethereum|
-  :Project deadline passed;\nraised < M1 -> refund pool = raised;
-split again
-  |Ethereum|
-  :Project deadline passed;\nM1 <= raised < goal ->\nleftover -> refund pool;
-split again
-  |Ethereum|
-  :Weekly campaign ended\nwith leftover;
-split again
+if (Trigger?) then (project deadline,\nraised < M1)
+  :refund pool = raised;
+elseif () then (project deadline,\nM1 <= raised < goal)
+  :leftover after fundable\nstages -> refund pool;
+elseif () then (weekly campaign\nended)
+  :leftover balance -> refund pool;
+else (admin cancels\nwith reason)
   |Admin|
-  :Cancel campaign (reason);\nsign cancelCampaign();
+  :Sign cancelCampaign();
   |Ethereum|
   :refund pool = raised - released;
-end split
+endif
 |System|
 :Notify affected donors\n"Refund available";
 |Donor|

@@ -64,5 +64,4 @@ pools and later cancellations correctly (see contract design §3.3).
 ## W7 — Deadline extension
 ![W7](diagrams/activity-w7-extension.svg)
 
-**Key points:** allowed once, for Project campaigns only (see the open
-clarification in [contract design §9](12-smart-contract-design.md#9-clarification-introduced-by-this-design)).
+**Key points:** allowed once, for Project campaigns only (D-59; see [contract design §9](12-smart-contract-design.md#9-clarification-introduced-by-this-design)).

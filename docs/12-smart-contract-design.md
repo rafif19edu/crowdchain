@@ -163,4 +163,4 @@ Target: 100% function coverage (NFR-MAINT-06).
 
 **Extension applies to Project campaigns only.** Weekly campaigns have no
 fundraising deadline in the same sense: donations stay open until the last
-week. *Needs the student's confirmation.*
+week. *Confirmed by the student (Decision Log D-59).*
