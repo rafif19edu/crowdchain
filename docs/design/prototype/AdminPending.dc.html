@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Admin pending actions</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F8F7FB}
+a{color:#6D28D9}a:hover{color:#5B21B6}
+</style>
+</helmet>
+<div style="font-family: Inter, system-ui, sans-serif; color: #17141F; background: #F8F7FB; min-height: 1200px; display: flex; flex-wrap: wrap; font-variant-numeric: tabular-nums;">
+  <nav aria-label="Admin" style="flex: 1 1 240px; max-width: 260px; background: #17141F; color: #FFFFFF; padding: 20px 14px; display: flex; flex-direction: column; gap: 4px; box-sizing: border-box;">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 4px 10px 20px;">
+      <span style="width: 30px; height: 30px; border-radius: 8px; background: #7C3AED;"></span>
+      <span style="display: flex; flex-direction: column;"><span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 18px;">CrowdChain</span><span style="font-size: 12px; color: #C9C2D9;">Admin</span></span>
+    </div>
+    <sc-for list="{{ nav }}" as="n" hint-placeholder-count="6">
+      <a href="{{ n.href }}" style="height: 42px; padding: 0 12px; border-radius: 8px; display: flex; align-items: center; gap: 8px; text-decoration: none; font-size: 15px; font-weight: {{ n.weight }}; background: {{ n.bg }}; color: {{ n.fg }};">{{ n.label }}<sc-if value="{{ n.hasCount }}" hint-placeholder-val="{{ false }}"><span style="margin-left: auto; min-width: 24px; height: 22px; padding: 0 6px; border-radius: 999px; background: #7C3AED; color: #FFFFFF; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center;">{{ n.count }}</span></sc-if></a>
+    </sc-for>
+  </nav>
+
+  <main style="flex: 999 1 640px; min-width: 0; padding: 28px 40px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
+      <h1 style="margin: 0; flex-grow: 1; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 30px;">Pending actions</h1>
+      <span style="display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 12px; border-radius: 8px; background: #ECFDF3; color: #14532D; font-size: 14px; font-weight: 600;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #15803D;"></span>Owner wallet 0xA11…9c0 connected</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px;">
+      <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+        <div style="background: #FFFFFF; border: 1px solid #E6E3EE; border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 4px;">
+          <span style="font-size: 13px; color: #5C5768;">{{ s.label }}</span>
+          <span style="font-weight: 700; font-size: 24px; font-family: 'Plus Jakarta Sans', sans-serif; color: {{ s.color }};">{{ s.value }}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <div role="tablist" aria-label="Filter by type" style="display: flex; flex-wrap: wrap; gap: 8px;">
+      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6">
+        <button type="button" role="tab" aria-selected="{{ t.sel }}" style="height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid {{ t.border }}; background: {{ t.bg }}; color: {{ t.fg }}; font: 600 14px Inter, sans-serif;">{{ t.label }}</button>
+      </sc-for>
+    </div>
+
+    <section style="background: #FFFFFF; border: 1px solid #E6E3EE; border-radius: 14px; overflow: hidden;">
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 820px;">
+          <thead>
+            <tr style="background: #F8F7FB; text-align: left; color: #5C5768;">
+              <th scope="col" style="padding: 12px 20px; font-weight: 600;">Type</th>
+              <th scope="col" style="padding: 12px; font-weight: 600;">Item</th>
+              <th scope="col" style="padding: 12px; font-weight: 600;">Due</th>
+              <th scope="col" style="padding: 12px 20px; font-weight: 600; text-align: right;">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{ rows }}" as="r" hint-placeholder-count="8">
+              <tr style="border-top: 1px solid #E6E3EE;">
+                <td style="padding: 14px 20px;"><span style="height: 26px; padding: 0 10px; border-radius: 6px; background: {{ r.bg }}; color: {{ r.fg }}; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; white-space: nowrap;">{{ r.type }}</span></td>
+                <td style="padding: 14px 12px;"><span style="display: flex; flex-direction: column; gap: 2px;"><span style="font-weight: 600;">{{ r.title }}</span><span style="font-size: 13px; color: #5C5768;">{{ r.meta }}</span></span></td>
+                <td style="padding: 14px 12px; white-space: nowrap; font-weight: {{ r.dueWeight }}; color: {{ r.dueColor }};">{{ r.due }}</td>
+                <td style="padding: 14px 20px; text-align: right;"><a href="{{ r.href }}" style="height: 38px; padding: 0 14px; border-radius: 8px; background: {{ r.btnBg }}; color: {{ r.btnFg }}; text-decoration: none; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;">{{ r.action }}</a></td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1200}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const N = (label, href, active, count) => ({ label: label, href: href, bg: active ? 'rgba(124,58,237,.25)' : 'transparent', fg: active ? '#FFFFFF' : '#D9D2E8', weight: active ? '600' : '500', hasCount: !!count, count: count || '' });
+    const primary = { btnBg: '#6D28D9', btnFg: '#FFFFFF' };
+    const soft = { btnBg: '#F3EEFF', btnFg: '#5B21B6' };
+    const normal = { dueWeight: '400', dueColor: '#5C5768' };
+    const urgent = { dueWeight: '600', dueColor: '#B91C1C' };
+    return {
+      nav: [N('Dashboard', '#', false), N('Pending actions', 'AdminPending.dc.html', true, '9'), N('Organisations', '#', false), N('Campaigns', '#', false), N('Users', 'AdminUsers.dc.html', false), N('Audit log', 'AdminUsers.dc.html', false)],
+      stats: [
+        { label: 'Waiting for you', value: '9', color: '#17141F' },
+        { label: 'Overdue', value: '2', color: '#B91C1C' },
+        { label: 'ETH in escrow', value: '6.4120', color: '#17141F' },
+        { label: 'Released this week', value: '0.9870', color: '#17141F' }
+      ],
+      tabs: [
+        { label: 'All 9', sel: 'true', bg: '#17141F', fg: '#FFFFFF', border: '#17141F' },
+        { label: 'Releases 3', sel: 'false', bg: '#FFFFFF', fg: '#17141F', border: '#E6E3EE' },
+        { label: 'Proofs 2', sel: 'false', bg: '#FFFFFF', fg: '#17141F', border: '#E6E3EE' },
+        { label: 'Campaigns 2', sel: 'false', bg: '#FFFFFF', fg: '#17141F', border: '#E6E3EE' },
+        { label: 'Organisations 1', sel: 'false', bg: '#FFFFFF', fg: '#17141F', border: '#E6E3EE' },
+        { label: 'Extensions 1', sel: 'false', bg: '#FFFFFF', fg: '#17141F', border: '#E6E3EE' }
+      ],
+      rows: [
+        Object.assign({ type: 'Proof overdue', bg: '#FEF2F2', fg: '#B91C1C', title: 'Community kitchen equipment · Milestone 2', meta: 'Pusat Jagaan OKU Cahaya · released 41 days ago', due: '11 days late', action: 'Review case', href: '#' }, urgent, soft),
+        Object.assign({ type: 'Weekly release', bg: '#F3EEFF', fg: '#5B21B6', title: 'Weekly food fund · Week 4 · 0.1000 ETH', meta: 'Maahad Tahfiz Al-Ikhlas · escrow 0.0500 ETH (not enough)', due: 'Today', action: 'Mark unfunded', href: '#' }, urgent, primary),
+        Object.assign({ type: 'Proof', bg: '#FFF7ED', fg: '#B45309', title: 'Repair the leaking roof · Milestone 1', meta: 'Rumah Kasih Harmoni · RM 8,420 spent of RM 8,500', due: 'Submitted 2 h ago', action: 'Review proof', href: 'AdminReview.dc.html' }, normal, primary),
+        Object.assign({ type: 'Weekly release', bg: '#F3EEFF', fg: '#5B21B6', title: 'Groceries and milk · Week 3 · 0.0926 ETH', meta: 'Rumah Anak Yatim Nur Iman · escrow 0.1620 ETH · week 2 proof approved', due: 'Today', action: 'Release', href: '#' }, normal, primary),
+        Object.assign({ type: 'Release request', bg: '#F3EEFF', fg: '#5B21B6', title: 'Kitchen refit · Milestone 2 · RM 6,000', meta: 'Rumah Kasih Harmoni · milestone 1 proof approved', due: 'Requested yesterday', action: 'Release', href: '#' }, normal, primary),
+        Object.assign({ type: 'Campaign', bg: '#EFF6FF', fg: '#1D4ED8', title: 'Rice storage room and freezer', meta: 'Maahad Tahfiz Darul Quran · Project · RM 8,000 · 3 milestones', due: 'Submitted 1 day ago', action: 'Review', href: '#' }, normal, soft),
+        Object.assign({ type: 'Campaign', bg: '#EFF6FF', fg: '#1D4ED8', title: 'Weekly meals and hygiene supplies', meta: 'Pusat Jagaan OKU Cahaya · Weekly · RM 400 × 12', due: 'Submitted 2 days ago', action: 'Review', href: '#' }, normal, soft),
+        Object.assign({ type: 'Organisation', bg: '#ECFDF3', fg: '#15803D', title: 'Rumah Seri Kenanga', meta: 'JKM · Children’s home · bank name matches', due: 'Submitted 3 days ago', action: 'Verify', href: '#' }, normal, soft),
+        Object.assign({ type: 'Extension', bg: '#F4F4F5', fg: '#3F3F46', title: 'Monthly food stock for 22 residents', meta: 'Seri Damai Elderly Care · 9% funded · deadline in 4 days', due: 'Requested today', action: 'Review', href: '#' }, normal, soft)
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

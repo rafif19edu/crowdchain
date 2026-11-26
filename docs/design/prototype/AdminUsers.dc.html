@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Admin users and audit log</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F8F7FB}
+a{color:#6D28D9}a:hover{color:#5B21B6}
+</style>
+</helmet>
+<div style="font-family: Inter, system-ui, sans-serif; color: #17141F; background: #F8F7FB; min-height: 1200px; display: flex; flex-wrap: wrap; font-variant-numeric: tabular-nums;">
+  <nav aria-label="Admin" style="flex: 1 1 240px; max-width: 260px; background: #17141F; color: #FFFFFF; padding: 20px 14px; display: flex; flex-direction: column; gap: 4px; box-sizing: border-box;">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 4px 10px 20px;">
+      <span style="width: 30px; height: 30px; border-radius: 8px; background: #7C3AED;"></span>
+      <span style="display: flex; flex-direction: column;"><span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 18px;">CrowdChain</span><span style="font-size: 12px; color: #C9C2D9;">Admin</span></span>
+    </div>
+    <a href="#" style="height: 42px; padding: 0 12px; border-radius: 8px; display: flex; align-items: center; text-decoration: none; font-size: 15px; color: #D9D2E8;">Dashboard</a>
+    <a href="AdminPending.dc.html" style="height: 42px; padding: 0 12px; border-radius: 8px; display: flex; align-items: center; text-decoration: none; font-size: 15px; color: #D9D2E8;">Pending actions</a>
+    <a href="#" style="height: 42px; padding: 0 12px; border-radius: 8px; display: flex; align-items: center; text-decoration: none; font-size: 15px; color: #D9D2E8;">Organisations</a>
+    <a href="#" style="height: 42px; padding: 0 12px; border-radius: 8px; display: flex; align-items: center; text-decoration: none; font-size: 15px; color: #D9D2E8;">Campaigns</a>
+    <a href="AdminUsers.dc.html" style="height: 42px; padding: 0 12px; border-radius: 8px; display: flex; align-items: center; text-decoration: none; font-size: 15px; font-weight: 600; background: rgba(124,58,237,.25); color: #FFFFFF;">Users</a>
+    <a href="#audit" style="height: 42px; padding: 0 12px; border-radius: 8px; display: flex; align-items: center; text-decoration: none; font-size: 15px; color: #D9D2E8;">Audit log</a>
+  </nav>
+
+  <main style="flex: 999 1 640px; min-width: 0; padding: 28px 40px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px;">
+    <section style="display: flex; flex-direction: column; gap: 16px;">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
+        <h1 style="margin: 0; flex-grow: 1; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 28px;">Users</h1>
+        <label for="usr-q" style="position: absolute; left: -9999px;">Search users</label>
+        <input id="usr-q" placeholder="Search name or email" style="height: 40px; width: 260px; padding: 0 12px; border: 1px solid #E6E3EE; border-radius: 8px; font: 400 14px Inter, sans-serif;">
+        <label for="usr-role" style="position: absolute; left: -9999px;">Role</label>
+        <select id="usr-role" style="height: 40px; padding: 0 10px; border: 1px solid #E6E3EE; border-radius: 8px; font: 500 14px Inter, sans-serif; background: #FFFFFF;"><option>All roles</option><option>Donor</option><option>Fundraiser</option></select>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E6E3EE; border-radius: 14px; overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 820px;">
+          <thead><tr style="background: #F8F7FB; text-align: left; color: #5C5768;">
+            <th scope="col" style="padding: 12px 20px; font-weight: 600;">Name</th><th scope="col" style="padding: 12px; font-weight: 600;">Role</th><th scope="col" style="padding: 12px; font-weight: 600;">Wallet</th><th scope="col" style="padding: 12px; font-weight: 600;">Status</th><th scope="col" style="padding: 12px 20px; font-weight: 600; text-align: right;">Action</th>
+          </tr></thead>
+          <tbody>
+            <sc-for list="{{ users }}" as="u" hint-placeholder-count="5">
+              <tr style="border-top: 1px solid #E6E3EE;">
+                <td style="padding: 12px 20px;"><span style="display: flex; flex-direction: column;"><span style="font-weight: 600;">{{ u.name }}</span><span style="font-size: 13px; color: #5C5768;">{{ u.email }}</span></span></td>
+                <td style="padding: 12px;">{{ u.role }}</td>
+                <td style="padding: 12px; font-family: ui-monospace, monospace; font-size: 13px;">{{ u.wallet }}</td>
+                <td style="padding: 12px;"><span style="height: 26px; padding: 0 10px; border-radius: 999px; background: {{ u.bg }}; color: {{ u.fg }}; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center;">{{ u.status }}</span></td>
+                <td style="padding: 12px 20px; text-align: right;"><button type="button" style="height: 36px; padding: 0 12px; border: 1px solid {{ u.btnBorder }}; border-radius: 8px; background: #FFFFFF; color: {{ u.btnFg }}; font: 600 13px Inter, sans-serif;">{{ u.action }}</button></td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="audit" style="display: flex; flex-direction: column; gap: 16px;">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
+        <h2 style="margin: 0; flex-grow: 1; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 24px;">Audit log</h2>
+        <span style="font-size: 13px; color: #5C5768;">Append-only · cannot be edited or deleted</span>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E6E3EE; border-radius: 14px; overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 820px;">
+          <thead><tr style="background: #F8F7FB; text-align: left; color: #5C5768;">
+            <th scope="col" style="padding: 12px 20px; font-weight: 600;">When</th><th scope="col" style="padding: 12px; font-weight: 600;">Action</th><th scope="col" style="padding: 12px; font-weight: 600;">Target</th><th scope="col" style="padding: 12px; font-weight: 600;">Reason</th><th scope="col" style="padding: 12px 20px; font-weight: 600;">Tx</th>
+          </tr></thead>
+          <tbody>
+            <sc-for list="{{ audit }}" as="a" hint-placeholder-count="6">
+              <tr style="border-top: 1px solid #E6E3EE;">
+                <td style="padding: 12px 20px; color: #5C5768; white-space: nowrap;">{{ a.when }}</td>
+                <td style="padding: 12px; font-family: ui-monospace, monospace; font-size: 13px;">{{ a.action }}</td>
+                <td style="padding: 12px;">{{ a.target }}</td>
+                <td style="padding: 12px; color: #5C5768;">{{ a.reason }}</td>
+                <td style="padding: 12px 20px;"><sc-if value="{{ a.hasTx }}" hint-placeholder-val="{{ false }}"><a href="#">{{ a.tx }} ↗</a></sc-if></td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1200}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const act = { status: 'Active', bg: '#ECFDF3', fg: '#15803D', action: 'Suspend', btnBorder: '#FECACA', btnFg: '#B91C1C' };
+    return {
+      users: [
+        Object.assign({ name: 'Nur Aisyah', email: 'aisyah@example.com', role: 'Donor', wallet: '0x3b9…71fa' }, act),
+        Object.assign({ name: 'Ustaz Hafiz Rahman', email: 'hafiz@alikhlas.edu.my', role: 'Fundraiser · verified', wallet: '0x5d2…e8b' }, act),
+        Object.assign({ name: 'Puan Rosnah Ali', email: 'rosnah@kasihharmoni.org', role: 'Fundraiser · verified', wallet: '0x91c…2d4' }, act),
+        { name: 'Encik Zulkifli', email: 'zul@cahaya-oku.org', role: 'Fundraiser · under review', wallet: '0x47e…b10', status: 'Suspended', bg: '#FEF2F2', fg: '#B91C1C', action: 'Unsuspend', btnBorder: '#E6E3EE', btnFg: '#17141F' },
+        Object.assign({ name: 'Lim Wei Jie', email: 'weijie@example.com', role: 'Donor', wallet: 'not linked' }, act)
+      ],
+      audit: [
+        { when: '15 Jan, 14:02', action: 'proof.approved', target: 'Roof repair · Milestone 1', reason: '—', hasTx: true, tx: '0x2f9…8d1' },
+        { when: '14 Jan, 09:30', action: 'campaign.cancelled', target: 'Community kitchen equipment', reason: 'Milestone 2 more than 30 days late', hasTx: true, tx: '0xc04…a77' },
+        { when: '14 Jan, 09:12', action: 'user.suspended', target: 'Encik Zulkifli', reason: 'Proof overdue, no response to 3 notices', hasTx: false, tx: '' },
+        { when: '12 Jan, 16:45', action: 'stage.released', target: 'Roof repair · Milestone 1 · 0.7870 ETH', reason: '—', hasTx: true, tx: '0x77a…310' },
+        { when: '11 Jan, 11:20', action: 'organization.rejected', target: 'Pusat Harapan Baru', reason: 'Certificate expired on 30 Sep 2026', hasTx: false, tx: '' },
+        { when: '28 Nov, 10:05', action: 'campaign.approved', target: 'Weekly food fund · Al-Ikhlas', reason: '—', hasTx: true, tx: '0x5e1…09c' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

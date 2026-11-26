@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CrowdChain — Landing</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#6D28D9}a:hover{color:#5B21B6}
+</style>
+</helmet>
+<div style="font-family: Inter, system-ui, sans-serif; color: #17141F; background: #FFFFFF; font-variant-numeric: tabular-nums;">
+
+  <section style="background: #1B0B33; color: #FFFFFF;">
+    <nav style="max-width: 1240px; margin: 0 auto; padding: 20px 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 24px;">
+      <a href="#" style="display: flex; align-items: center; gap: 10px; color: #FFFFFF; text-decoration: none;">
+        <span style="width: 34px; height: 34px; border-radius: 10px; background: #7C3AED; display: flex; align-items: center; justify-content: center;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
+        </span>
+        <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 20px;">CrowdChain</span>
+      </a>
+      <div style="display: flex; flex-wrap: wrap; gap: 24px; flex-grow: 1; font-size: 15px;">
+        <a href="Campaigns.dc.html" style="color: #E9E3F5; text-decoration: none;">Campaigns</a>
+        <a href="#how" style="color: #E9E3F5; text-decoration: none;">How it works</a>
+        <a href="#" style="color: #E9E3F5; text-decoration: none;">For organisations</a>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <a href="AuthWallet.dc.html" style="height: 40px; padding: 0 16px; display: inline-flex; align-items: center; border-radius: 8px; color: #FFFFFF; text-decoration: none; font-weight: 600; font-size: 15px;">Log in</a>
+        <a href="AuthWallet.dc.html" style="height: 40px; padding: 0 16px; display: inline-flex; align-items: center; border-radius: 8px; background: #FFFFFF; color: #1B0B33; text-decoration: none; font-weight: 600; font-size: 15px;">Sign up</a>
+      </div>
+    </nav>
+
+    <div style="max-width: 1240px; margin: 0 auto; padding: 72px 32px 96px; display: flex; flex-wrap: wrap; gap: 56px; align-items: center;">
+      <div style="flex: 1 1 520px; display: flex; flex-direction: column; gap: 24px;">
+        <span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; height: 30px; padding: 0 12px; border-radius: 999px; background: rgba(196,181,253,.14); color: #DDD6FE; font-size: 13px; font-weight: 600;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+          Only JKM- and MAIN-registered organisations
+        </span>
+        <h1 style="margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 56px; line-height: 64px; letter-spacing: -0.02em;">Give with proof.<br>Every ringgit, traceable.</h1>
+        <p style="margin: 0; max-width: 560px; font-size: 18px; line-height: 28px; color: #D9D2E8;">Donations wait in a smart-contract escrow and are released to care centres and tahfiz one stage at a time, only after the receipts for the last stage are checked.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+          <a href="Campaigns.dc.html" style="height: 48px; padding: 0 22px; display: inline-flex; align-items: center; border-radius: 8px; background: #7C3AED; color: #FFFFFF; text-decoration: none; font-weight: 600; font-size: 16px;">Browse campaigns</a>
+          <a href="OrgVerification.dc.html" style="height: 48px; padding: 0 22px; display: inline-flex; align-items: center; border-radius: 8px; border: 1px solid rgba(255,255,255,.3); color: #FFFFFF; text-decoration: none; font-weight: 600; font-size: 16px;">Register your organisation</a>
+        </div>
+      </div>
+      <div style="flex: 1 1 420px; display: flex; flex-direction: column; gap: 12px; background: #2A1150; border: 1px solid rgba(196,181,253,.2); border-radius: 16px; padding: 24px;">
+        <span style="font-size: 13px; font-weight: 600; color: #C4B5FD;">LIVE TIMELINE · DANA MAKANAN MINGGUAN</span>
+        <sc-for list="{{ heroEvents }}" as="e" hint-placeholder-count="4">
+          <div style="display: flex; gap: 12px; align-items: flex-start; padding: 12px; border-radius: 10px; background: rgba(255,255,255,.04);">
+            <span style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 8px; background: {{ e.bg }}; display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 13px; font-weight: 700;">{{ e.icon }}</span>
+            <span style="display: flex; flex-direction: column; gap: 2px; flex-grow: 1;"><span style="font-weight: 600; font-size: 15px;">{{ e.title }}</span><span style="font-size: 13px; color: #CFC6E0;">{{ e.meta }}</span></span>
+            <span style="font-size: 12px; color: #C4B5FD;">{{ e.time }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" style="max-width: 1240px; margin: 0 auto; padding: 88px 32px 40px; display: flex; flex-direction: column; gap: 40px;">
+    <div style="display: flex; flex-direction: column; gap: 10px; max-width: 640px;">
+      <span style="font-size: 14px; font-weight: 600; color: #6D28D9;">HOW IT WORKS</span>
+      <h2 style="margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 36px; line-height: 44px;">Money moves only when there is proof</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px;">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+        <div style="border: 1px solid #E6E3EE; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 12px;">
+          <span style="width: 40px; height: 40px; border-radius: 10px; background: #F3EEFF; color: #5B21B6; display: flex; align-items: center; justify-content: center; font: 800 17px 'Plus Jakarta Sans', sans-serif;">{{ s.n }}</span>
+          <span style="font-weight: 600; font-size: 18px;">{{ s.title }}</span>
+          <span style="font-size: 15px; line-height: 23px; color: #5C5768;">{{ s.body }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width: 1240px; margin: 0 auto; padding: 48px 32px; display: flex; flex-direction: column; gap: 28px;">
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px;">
+      <h2 style="margin: 0; flex-grow: 1; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 32px;">Campaigns that need you now</h2>
+      <a href="Campaigns.dc.html" style="font-weight: 600; font-size: 15px;">See all campaigns →</a>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;">
+      <sc-for list="{{ campaigns }}" as="c" hint-placeholder-count="3">
+        <a href="CampaignDetail.dc.html" style="text-decoration: none; color: #17141F; border: 1px solid #E6E3EE; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">
+          <div style="height: 168px; background: {{ c.img }}; position: relative;">
+            <span style="position: absolute; top: 12px; left: 12px; height: 26px; padding: 0 10px; border-radius: 999px; background: #FFFFFF; color: #17141F; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center;">{{ c.type }}</span>
+          </div>
+          <div style="padding: 18px; display: flex; flex-direction: column; gap: 12px;">
+            <span style="font-size: 13px; color: #5C5768;">{{ c.org }}</span>
+            <span style="font-weight: 600; font-size: 17px; line-height: 24px;">{{ c.title }}</span>
+            <div style="height: 8px; border-radius: 999px; background: #EFECF5; overflow: hidden;"><div style="height: 8px; width: {{ c.pct }}; background: #6D28D9;"></div></div>
+            <div style="display: flex; justify-content: space-between; font-size: 14px;"><span style="font-weight: 600;">{{ c.raised }}</span><span style="color: #5C5768;">{{ c.goal }}</span></div>
+            <div style="display: flex; align-items: center; gap: 8px; padding-top: 4px; border-top: 1px solid #E6E3EE;">
+              <span style="height: 26px; min-width: 32px; padding: 0 8px; border-radius: 6px; background: {{ c.riskBg }}; color: {{ c.riskFg }}; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; margin-top: 10px;">{{ c.score }}</span>
+              <span style="font-size: 13px; color: {{ c.riskFg }}; font-weight: 600; margin-top: 10px;">{{ c.risk }}</span>
+              <span style="font-size: 13px; color: #5C5768; margin-left: auto; margin-top: 10px;">{{ c.left }}</span>
+            </div>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width: 1240px; margin: 0 auto; padding: 48px 32px 88px;">
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; background: #F8F7FB; border-radius: 16px; padding: 40px;">
+      <sc-for list="{{ pillars }}" as="p" hint-placeholder-count="3">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-weight: 600; font-size: 17px;">{{ p.title }}</span>
+          <span style="font-size: 15px; line-height: 23px; color: #5C5768;">{{ p.body }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <footer style="border-top: 1px solid #E6E3EE;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 28px 32px; display: flex; flex-wrap: wrap; gap: 16px; font-size: 14px; color: #5C5768;">
+      <span style="flex-grow: 1;">CrowdChain · Final Year Project, Faculty of Computing &amp; Meta-Technology, UPSI · Runs on the Ethereum Sepolia testnet: no real money.</span>
+      <a href="#">Escrow contract 0x8f3a…c21e ↗</a>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2240}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      heroEvents: [
+        { icon: '+', bg: '#7C3AED', title: 'Donation 0.0046 ETH', meta: 'Anonymous · ≈ RM 50.00', time: '2 min' },
+        { icon: '✓', bg: '#15803D', title: 'Week 3 proof recorded', meta: 'Receipt + transfer slip · hash 9c1e…', time: '3 h' },
+        { icon: '→', bg: '#5B21B6', title: 'Week 3 released', meta: '0.1000 ETH to organisation wallet', time: '2 d' },
+        { icon: '+', bg: '#7C3AED', title: 'Donation 0.0185 ETH', meta: 'Nur Aisyah · ≈ RM 200.00', time: '2 d' }
+      ],
+      steps: [
+        { n: '1', title: 'Organisation verified', body: 'JKM or MAIN registration, bank account and person-in-charge letter are checked by the admin before any campaign goes live.' },
+        { n: '2', title: 'You donate into escrow', body: 'Your ETH goes to the smart contract, not to a person. You can see it on Etherscan.' },
+        { n: '3', title: 'Released in stages', body: 'Each milestone or week is paid out only after the receipts for the previous one are approved.' },
+        { n: '4', title: 'Refund if it falls short', body: 'If a campaign is cancelled or under-funded, you claim back your share yourself.' }
+      ],
+      campaigns: [
+        { type: 'Weekly', org: 'Maahad Tahfiz Al-Ikhlas · Perak', title: 'Weekly food fund for 60 tahfiz students', pct: '31%', raised: '≈ RM 2,700', goal: 'of RM 8,640', score: '92', risk: 'Low risk', riskBg: '#ECFDF3', riskFg: '#15803D', left: 'Week 4 of 8', img: '#E9DFFC' },
+        { type: 'Project', org: 'Rumah Kasih Harmoni · Selangor', title: 'Repair the leaking roof of the girls’ hostel', pct: '68%', raised: '≈ RM 20,400', goal: 'of RM 30,000', score: '84', risk: 'Low risk', riskBg: '#ECFDF3', riskFg: '#15803D', left: '12 days left', img: '#DCEBFB' },
+        { type: 'Project', org: 'Pusat Jagaan Warga Emas Seri Damai · Johor', title: 'Two wheelchairs and a hospital bed', pct: '22%', raised: '≈ RM 1,980', goal: 'of RM 9,000', score: '61', risk: 'Medium risk', riskBg: '#FFF7ED', riskFg: '#B45309', left: '26 days left', img: '#FCE8D8' }
+      ],
+      pillars: [
+        { title: 'Verified, not just listed', body: 'Every fundraiser is a registered care centre or tahfiz. Expired registrations pause their campaigns automatically.' },
+        { title: 'A Trust Score you can read', body: 'Every campaign shows its score and exactly how it was calculated: registration, documents, on-time proof, updates and history.' },
+        { title: 'Receipts on the record', body: 'A fingerprint (hash) of every approved receipt is written on-chain, so it can never be quietly swapped later.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
