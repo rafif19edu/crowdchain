@@ -16,6 +16,12 @@ return [
     'default' => env('FILESYSTEM_DISK', 'local'),
 
     /*
+    | CrowdChain uploads (organisation documents, proofs, images).
+    | "local" (private, signed URLs) in development; "r2" in production (D-47).
+    */
+    'documents_disk' => env('DOCUMENTS_DISK', 'local'),
+
+    /*
     |--------------------------------------------------------------------------
     | Filesystem Disks
     |--------------------------------------------------------------------------
@@ -29,6 +35,19 @@ return [
     */
 
     'disks' => [
+
+        'r2' => [
+            'driver' => 's3',
+            'key' => env('R2_ACCESS_KEY_ID'),
+            'secret' => env('R2_SECRET_ACCESS_KEY'),
+            'region' => 'auto',
+            'bucket' => env('R2_BUCKET'),
+            'endpoint' => env('R2_ENDPOINT'),
+            'use_path_style_endpoint' => false,
+            'visibility' => 'private',
+            'throw' => true,
+            'report' => true,
+        ],
 
         'local' => [
             'driver' => 'local',

@@ -2,7 +2,9 @@
 
 namespace App\Support;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * Builds the single JSON envelope every CrowdChain API response uses
@@ -29,6 +31,25 @@ final class ApiResponse
         }
 
         return new JsonResponse($body, $status);
+    }
+
+    /**
+     * A page of results with the standard meta block (docs/15 §1.3).
+     *
+     * @param  class-string<JsonResource>  $resource
+     */
+    public static function paginated(LengthAwarePaginator $page, string $resource, ?string $message = null): JsonResponse
+    {
+        return self::success(
+            data: $resource::collection($page->items())->resolve(),
+            message: $message,
+            meta: [
+                'current_page' => $page->currentPage(),
+                'per_page' => $page->perPage(),
+                'total' => $page->total(),
+                'last_page' => $page->lastPage(),
+            ],
+        );
     }
 
     /**

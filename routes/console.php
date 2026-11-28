@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schedule;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+/*
+| Run by Heroku Scheduler in production (D-46): `php artisan schedule:run`
+| is not used there; each command is added to Heroku Scheduler directly.
+| Locally you can run `php artisan schedule:work`.
+*/
+
+Schedule::command('registrations:check-expiry')->dailyAt('01:00');

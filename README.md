@@ -22,6 +22,10 @@ Start with [`docs/00-decision-log.md`](docs/00-decision-log.md) and [`docs/01-sr
 
 You need: **Laragon** (PHP 8.3+, Composer), **Docker Desktop**, **Node.js 20+**, **Git**.
 
+**Enable the PHP `gmp` extension** (needed to verify MetaMask wallet signatures):
+Laragon menu → **PHP** → **Extensions** → click **gmp** (a tick appears) → restart Laragon.
+Check it with `php -m` — `gmp` must be in the list.
+
 Open a terminal in the project folder (Laragon → Terminal) and run these one at a time.
 
 1. Install PHP dependencies:
@@ -54,13 +58,29 @@ docker compose up -d
 php artisan migrate
 ```
 
-6. Start the API:
+6. Create the admin account. First set `ADMIN_EMAIL` and `ADMIN_PASSWORD` (at least 12 characters) in `.env`, then:
+
+```bash
+php artisan db:seed
+```
+
+7. Start the API:
 
 ```bash
 php artisan serve
 ```
 
-7. Check it works: open http://127.0.0.1:8000/api/v1/health — you should see `"status": "ok"`.
+8. Check it works: open http://127.0.0.1:8000/api/v1/health — you should see `"status": "ok"`.
+
+### Emails during development
+
+`MAIL_MAILER=log` writes every email (verification links, password resets) to
+`storage/logs/laravel.log`. Open that file and copy the link.
+
+### Daily jobs
+
+`php artisan registrations:check-expiry` expires organisations whose certificate has expired and
+sends 30-day reminders. Run `php artisan schedule:work` to run it on schedule locally.
 
 ## Running the tests
 
