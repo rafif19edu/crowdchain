@@ -47,6 +47,22 @@ return [
         'expiry_reminder_days' => 30,
     ],
 
+    // Seeded single admin (D-12, Q68). No defaults: the seeder refuses to run without them.
+    'admin' => [
+        'name' => env('ADMIN_NAME', 'CrowdChain Admin'),
+        'email' => env('ADMIN_EMAIL'),
+        'password' => env('ADMIN_PASSWORD'),
+        'wallet' => env('ADMIN_WALLET_ADDRESS'),
+    ],
+
+    'states' => [
+        'Johor', 'Kedah', 'Kelantan', 'Melaka', 'Negeri Sembilan', 'Pahang', 'Perak', 'Perlis',
+        'Pulau Pinang', 'Sabah', 'Sarawak', 'Selangor', 'Terengganu',
+        'Wilayah Persekutuan Kuala Lumpur', 'Wilayah Persekutuan Labuan', 'Wilayah Persekutuan Putrajaya',
+    ],
+
+    'wallet_nonce_minutes' => 5,
+
     'uploads' => [
         // D-47, NFR-SEC-06
         'max_kb' => 5120,

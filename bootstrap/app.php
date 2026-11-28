@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Middleware\EnsureEmailVerified;
+use App\Http\Middleware\EnsureNotSuspended;
+use App\Http\Middleware\EnsureRole;
 use App\Support\ApiResponse;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
@@ -22,6 +25,12 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         // Sanctum SPA cookie authentication for the same-origin React app (D-44).
         $middleware->statefulApi();
+
+        $middleware->alias([
+            'role' => EnsureRole::class,
+            'not-suspended' => EnsureNotSuspended::class,
+            'verified-email' => EnsureEmailVerified::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $isApi = fn (Request $request) => $request->is('api/*') || $request->expectsJson();
