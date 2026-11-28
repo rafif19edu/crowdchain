@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CrowdChain Design System</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#6D28D9}a:hover{color:#5B21B6}
+</style>
+</helmet>
+<div style="font-family: Inter, system-ui, sans-serif; color: #17141F; background: #FFFFFF; font-variant-numeric: tabular-nums;">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 64px 32px; display: flex; flex-direction: column; gap: 56px;">
+
+    <header style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 36px; height: 36px; border-radius: 10px; background: #6D28D9; display: flex; align-items: center; justify-content: center;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
+        </div>
+        <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 22px;">CrowdChain</span>
+      </div>
+      <h1 style="margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 44px; line-height: 52px; font-weight: 800;">Design System</h1>
+      <p style="margin: 0; max-width: 720px; font-size: 17px; line-height: 27px; color: #5C5768;">Light, calm and trustworthy for the app. Deep purple from the proposal deck is kept for the landing hero only. Built on shadcn/ui tokens, so every value below maps to a CSS variable in <code>globals.css</code>.</p>
+    </header>
+
+    <section style="display: flex; flex-direction: column; gap: 20px;">
+      <h2 style="margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 26px; font-weight: 700;">Colour</h2>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px;">
+        <sc-for list="{{ colors }}" as="c" hint-placeholder-count="12">
+          <div style="border: 1px solid #E6E3EE; border-radius: 12px; overflow: hidden;">
+            <div style="height: 72px; background: {{ c.hex }};"></div>
+            <div style="padding: 12px 14px; display: flex; flex-direction: column; gap: 2px;">
+              <span style="font-weight: 600; font-size: 14px;">{{ c.name }}</span>
+              <span style="font-size: 13px; color: #5C5768;">{{ c.token }} · {{ c.hex }}</span>
+              <span style="font-size: 12px; color: #5C5768;">{{ c.use }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 20px;">
+      <h2 style="margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 26px; font-weight: 700;">Typography</h2>
+      <div style="display: flex; flex-direction: column; border: 1px solid #E6E3EE; border-radius: 12px;">
+        <div style="display: flex; align-items: baseline; gap: 24px; padding: 18px 24px; border-bottom: 1px solid #E6E3EE;">
+          <span style="width: 180px; flex-shrink: 0; font-size: 13px; color: #5C5768;">Display · Jakarta 800 · 48/56</span>
+          <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 48px; line-height: 56px;">Give with proof</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 24px; padding: 18px 24px; border-bottom: 1px solid #E6E3EE;">
+          <span style="width: 180px; flex-shrink: 0; font-size: 13px; color: #5C5768;">H1 · Jakarta 700 · 32/40</span>
+          <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 32px; line-height: 40px;">Weekly food fund for 60 students</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 24px; padding: 18px 24px; border-bottom: 1px solid #E6E3EE;">
+          <span style="width: 180px; flex-shrink: 0; font-size: 13px; color: #5C5768;">H2 · Jakarta 700 · 24/32</span>
+          <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 24px; line-height: 32px;">Milestones</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 24px; padding: 18px 24px; border-bottom: 1px solid #E6E3EE;">
+          <span style="width: 180px; flex-shrink: 0; font-size: 13px; color: #5C5768;">H3 · Inter 600 · 18/28</span>
+          <span style="font-weight: 600; font-size: 18px; line-height: 28px;">Proof of spending</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 24px; padding: 18px 24px; border-bottom: 1px solid #E6E3EE;">
+          <span style="width: 180px; flex-shrink: 0; font-size: 13px; color: #5C5768;">Body · Inter 400 · 16/24</span>
+          <span style="font-size: 16px; line-height: 24px;">Funds stay in escrow and are released one stage at a time, after the previous receipts are approved.</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 24px; padding: 18px 24px; border-bottom: 1px solid #E6E3EE;">
+          <span style="width: 180px; flex-shrink: 0; font-size: 13px; color: #5C5768;">Small · Inter 400 · 14/20</span>
+          <span style="font-size: 14px; line-height: 20px; color: #5C5768;">Registered with Majlis Agama Islam Perak · Reg. no. MAIP/TFZ/0412</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: 24px; padding: 18px 24px;">
+          <span style="width: 180px; flex-shrink: 0; font-size: 13px; color: #5C5768;">Money · tabular · 600</span>
+          <span style="display: flex; align-items: baseline; gap: 10px;"><span style="font-weight: 600; font-size: 28px;">≈ RM 2,700.00</span><span style="font-size: 14px; color: #5C5768;">0.2500 ETH</span></span>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px;">
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <h2 style="margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 26px; font-weight: 700;">Buttons</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+          <button type="button" style="height: 44px; padding: 0 20px; border: none; border-radius: 8px; background: #6D28D9; color: #FFFFFF; font: 600 15px Inter, sans-serif;">Donate</button>
+          <button type="button" style="height: 44px; padding: 0 20px; border: 1px solid #E6E3EE; border-radius: 8px; background: #FFFFFF; color: #17141F; font: 600 15px Inter, sans-serif;">Secondary</button>
+          <button type="button" style="height: 44px; padding: 0 20px; border: none; border-radius: 8px; background: #F3EEFF; color: #5B21B6; font: 600 15px Inter, sans-serif;">Soft</button>
+          <button type="button" style="height: 44px; padding: 0 20px; border: none; border-radius: 8px; background: #B91C1C; color: #FFFFFF; font: 600 15px Inter, sans-serif;">Cancel campaign</button>
+          <button type="button" disabled style="height: 44px; padding: 0 20px; border: none; border-radius: 8px; background: #E6E3EE; color: #5C5768; font: 600 15px Inter, sans-serif;">Disabled</button>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+          <button type="button" style="height: 44px; padding: 0 18px; border: none; border-radius: 8px; background: #6D28D9; color: #FFFFFF; font: 600 15px Inter, sans-serif; display: flex; align-items: center; gap: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg>
+            Sign in MetaMask
+          </button>
+          <button type="button" style="height: 44px; padding: 0 18px; border: none; border-radius: 8px; background: #5B21B6; color: #FFFFFF; font: 600 15px Inter, sans-serif; display: flex; align-items: center; gap: 10px;">
+            <span style="width: 16px; height: 16px; border-radius: 50%; border: 2px solid #C4B5FD; border-top-color: #FFFFFF;"></span>
+            Waiting for confirmation…
+          </button>
+        </div>
+        <p style="margin: 0; font-size: 14px; color: #5C5768;">Height 44 px (touch target). One primary button per view. Blockchain actions always show the MetaMask wallet icon so users know a signature is coming.</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <h2 style="margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 26px; font-weight: 700;">Badges</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <sc-for list="{{ statuses }}" as="s" hint-placeholder-count="8">
+            <span style="display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 999px; background: {{ s.bg }}; color: {{ s.fg }}; font-size: 13px; font-weight: 600;"><span style="width: 6px; height: 6px; border-radius: 50%; background: {{ s.fg }};"></span>{{ s.label }}</span>
+          </sc-for>
+        </div>
+        <h3 style="margin: 8px 0 0; font-size: 16px; font-weight: 600;">Trust Score & Risk Level</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+          <sc-for list="{{ risks }}" as="r" hint-placeholder-count="3">
+            <div style="display: flex; align-items: center; gap: 10px; padding: 8px 14px 8px 8px; border: 1px solid #E6E3EE; border-radius: 12px;">
+              <span style="width: 44px; height: 44px; border-radius: 10px; background: {{ r.bg }}; color: {{ r.fg }}; display: flex; align-items: center; justify-content: center; font: 800 17px 'Plus Jakarta Sans', sans-serif;">{{ r.score }}</span>
+              <span style="display: flex; flex-direction: column;"><span style="font-size: 12px; color: #5C5768;">Trust Score</span><span style="font-size: 14px; font-weight: 600; color: {{ r.fg }};">{{ r.label }}</span></span>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin: 0; font-size: 14px; color: #5C5768;">Risk is never shown by colour alone: the label and score always appear with it.</p>
+      </div>
+    </section>
+
+    <section style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px;">
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <h2 style="margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 26px; font-weight: 700;">Form fields</h2>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label for="ds-amt" style="font-size: 14px; font-weight: 600;">Amount (RM)</label>
+          <input id="ds-amt" value="50.00" style="height: 44px; padding: 0 14px; border: 1px solid #E6E3EE; border-radius: 8px; font: 400 16px Inter, sans-serif; color: #17141F;">
+          <span style="font-size: 13px; color: #5C5768;">≈ 0.00463 ETH at RM 10,800 / ETH</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label for="ds-reg" style="font-size: 14px; font-weight: 600;">Registration number</label>
+          <input id="ds-reg" value="JKM/PJ/" style="height: 44px; padding: 0 14px; border: 2px solid #B91C1C; border-radius: 8px; font: 400 16px Inter, sans-serif; color: #17141F;">
+          <span style="font-size: 13px; color: #B91C1C; display: flex; align-items: center; gap: 6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+            This registration number is already registered.
+          </span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <span style="font-size: 14px; font-weight: 600;">Registration certificate</span>
+          <div style="border: 1.5px dashed #C9C2D9; border-radius: 12px; padding: 20px; display: flex; align-items: center; gap: 14px; background: #F8F7FB;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>
+            <span style="display: flex; flex-direction: column;"><span style="font-size: 15px; font-weight: 600;">Drop file or <a href="#">browse</a></span><span style="font-size: 13px; color: #5C5768;">PDF, JPG or PNG · up to 5 MB · stored privately</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <h2 style="margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 26px; font-weight: 700;">States</h2>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;">
+          <div style="border: 1px solid #E6E3EE; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+            <span style="font-size: 12px; font-weight: 600; color: #5C5768;">LOADING</span>
+            <div style="height: 90px; border-radius: 8px; background: #EFECF5;"></div>
+            <div style="height: 12px; width: 80%; border-radius: 6px; background: #EFECF5;"></div>
+            <div style="height: 12px; width: 50%; border-radius: 6px; background: #EFECF5;"></div>
+          </div>
+          <div style="border: 1px solid #E6E3EE; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; align-items: center; text-align: center; justify-content: center;">
+            <span style="font-size: 12px; font-weight: 600; color: #5C5768; align-self: flex-start;">EMPTY</span>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <span style="font-weight: 600; font-size: 15px;">No campaigns match</span>
+            <a href="#" style="font-size: 14px;">Clear filters</a>
+          </div>
+          <div style="border: 1px solid #FECACA; background: #FEF2F2; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 12px; font-weight: 600; color: #B91C1C;">ERROR</span>
+            <span style="font-weight: 600; font-size: 15px; color: #7F1D1D;">Couldn't load campaigns</span>
+            <span style="font-size: 14px; color: #7F1D1D;">Check your connection and try again.</span>
+            <button type="button" style="align-self: flex-start; height: 36px; padding: 0 14px; border: 1px solid #FECACA; border-radius: 8px; background: #FFFFFF; color: #7F1D1D; font: 600 14px Inter, sans-serif;">Retry</button>
+          </div>
+          <div style="border: 1px solid #DDD6FE; background: #F3EEFF; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 12px; font-weight: 600; color: #5B21B6;">TRANSACTION PENDING</span>
+            <span style="font-weight: 600; font-size: 15px; color: #2E1065;">Waiting for 1 confirmation</span>
+            <span style="font-size: 14px; color: #3B1A7A;">Usually 10–20 seconds on Sepolia.</span>
+            <a href="#" style="font-size: 14px; display: flex; align-items: center; gap: 6px;">View on Etherscan
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 16px;">
+      <h2 style="margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 26px; font-weight: 700;">Spacing, radius & elevation</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-end;">
+        <sc-for list="{{ spaces }}" as="sp" hint-placeholder-count="8">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+            <div style="width: {{ sp.px }}; height: {{ sp.px }}; background: #DDD6FE; border-radius: 4px;"></div>
+            <span style="font-size: 12px; color: #5C5768;">{{ sp.label }}</span>
+          </div>
+        </sc-for>
+        <div style="width: 1px; height: 64px; background: #E6E3EE; margin: 0 8px;"></div>
+        <div style="display: flex; gap: 16px;">
+          <div style="width: 96px; height: 64px; border: 1px solid #E6E3EE; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #5C5768;">8 · input</div>
+          <div style="width: 96px; height: 64px; border: 1px solid #E6E3EE; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #5C5768;">12 · card</div>
+          <div style="width: 96px; height: 64px; border-radius: 12px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(23,20,31,.06), 0 8px 24px rgba(23,20,31,.08); display: flex; align-items: center; justify-content: center; font-size: 12px; color: #5C5768;">dialog</div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1760}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      colors: [
+        { name: 'Primary', token: '--primary', hex: '#6D28D9', use: 'Buttons, links, progress' },
+        { name: 'Primary hover', token: '--primary-hover', hex: '#5B21B6', use: 'Hover, pressed' },
+        { name: 'Primary soft', token: '--accent', hex: '#F3EEFF', use: 'Soft buttons, highlights' },
+        { name: 'Brand night', token: '--brand-night', hex: '#1B0B33', use: 'Landing hero only' },
+        { name: 'Foreground', token: '--foreground', hex: '#17141F', use: 'Body text' },
+        { name: 'Muted text', token: '--muted-foreground', hex: '#5C5768', use: 'Secondary text (6.9:1)' },
+        { name: 'Border', token: '--border', hex: '#E6E3EE', use: 'Cards, inputs, dividers' },
+        { name: 'Surface', token: '--muted', hex: '#F8F7FB', use: 'Page sections, sidebars' },
+        { name: 'Success', token: '--success', hex: '#15803D', use: 'Released, verified, low risk' },
+        { name: 'Warning', token: '--warning', hex: '#B45309', use: 'Pending, medium risk, overdue soon' },
+        { name: 'Danger', token: '--destructive', hex: '#B91C1C', use: 'Rejected, high risk, cancel' },
+        { name: 'Info', token: '--info', hex: '#1D4ED8', use: 'On-chain links, notices' }
+      ],
+      statuses: [
+        { label: 'Active', bg: '#ECFDF3', fg: '#15803D' },
+        { label: 'Funded', bg: '#F3EEFF', fg: '#5B21B6' },
+        { label: 'Pending review', bg: '#FFF7ED', fg: '#B45309' },
+        { label: 'Released', bg: '#ECFDF3', fg: '#15803D' },
+        { label: 'Unfunded', bg: '#F4F4F5', fg: '#52525B' },
+        { label: 'Proof overdue', bg: '#FEF2F2', fg: '#B91C1C' },
+        { label: 'Refund available', bg: '#EFF6FF', fg: '#1D4ED8' },
+        { label: 'Cancelled', bg: '#FEF2F2', fg: '#B91C1C' }
+      ],
+      risks: [
+        { score: '82', label: 'Low risk', bg: '#ECFDF3', fg: '#15803D' },
+        { score: '58', label: 'Medium risk', bg: '#FFF7ED', fg: '#B45309' },
+        { score: '31', label: 'High risk', bg: '#FEF2F2', fg: '#B91C1C' }
+      ],
+      spaces: [4, 8, 12, 16, 24, 32, 48, 64].map((n) => ({ px: n + 'px', label: String(n) }))
+    };
+  }
+}
+</script>
+</body>
+</html>

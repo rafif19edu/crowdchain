@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Create campaign</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F8F7FB}
+a{color:#6D28D9}a:hover{color:#5B21B6}
+</style>
+</helmet>
+<div style="font-family: Inter, system-ui, sans-serif; color: #17141F; background: #F8F7FB; min-height: 1600px; display: flex; flex-wrap: wrap; font-variant-numeric: tabular-nums;">
+  <nav aria-label="Fundraiser" style="flex: 1 1 240px; max-width: 260px; background: #FFFFFF; border-right: 1px solid #E6E3EE; padding: 20px 14px; display: flex; flex-direction: column; gap: 4px; box-sizing: border-box;">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 4px 10px 20px;">
+      <span style="width: 30px; height: 30px; border-radius: 8px; background: #6D28D9;"></span>
+      <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 18px;">CrowdChain</span>
+    </div>
+    <a href="#" style="height: 42px; padding: 0 12px; border-radius: 8px; display: flex; align-items: center; text-decoration: none; font-size: 15px; color: #2C2836;">Dashboard</a>
+    <a href="OrgVerification.dc.html" style="height: 42px; padding: 0 12px; border-radius: 8px; display: flex; align-items: center; text-decoration: none; font-size: 15px; color: #2C2836;">Organisation</a>
+    <a href="ManageCampaign.dc.html" style="height: 42px; padding: 0 12px; border-radius: 8px; display: flex; align-items: center; text-decoration: none; font-size: 15px; font-weight: 600; background: #F3EEFF; color: #5B21B6;">My campaigns</a>
+    <a href="#" style="height: 42px; padding: 0 12px; border-radius: 8px; display: flex; align-items: center; text-decoration: none; font-size: 15px; color: #2C2836;">Notifications</a>
+    <a href="AuthWallet.dc.html" style="height: 42px; padding: 0 12px; border-radius: 8px; display: flex; align-items: center; text-decoration: none; font-size: 15px; color: #2C2836;">Profile &amp; wallet</a>
+  </nav>
+
+  <main style="flex: 999 1 640px; min-width: 0; padding: 32px 40px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
+      <h1 style="margin: 0; flex-grow: 1; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 30px;">New campaign</h1>
+      <span style="font-size: 14px; color: #5C5768;">Active: 0 of 1 weekly · 1 of 2 project</span>
+    </div>
+
+    <ol aria-label="Steps" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; font-size: 14px; font-weight: 600;">
+      <li style="height: 34px; padding: 0 14px; border-radius: 999px; background: #ECFDF3; color: #15803D; display: flex; align-items: center;">1 Type ✓</li>
+      <li style="height: 34px; padding: 0 14px; border-radius: 999px; background: #ECFDF3; color: #15803D; display: flex; align-items: center;">2 Story ✓</li>
+      <li style="height: 34px; padding: 0 14px; border-radius: 999px; background: #6D28D9; color: #FFFFFF; display: flex; align-items: center;">3 Funding plan</li>
+      <li style="height: 34px; padding: 0 14px; border-radius: 999px; background: #FFFFFF; border: 1px solid #E6E3EE; color: #5C5768; display: flex; align-items: center;">4 Documents</li>
+      <li style="height: 34px; padding: 0 14px; border-radius: 999px; background: #FFFFFF; border: 1px solid #E6E3EE; color: #5C5768; display: flex; align-items: center;">5 Review &amp; submit</li>
+    </ol>
+
+    <section style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;">
+      <label style="display: flex; gap: 14px; padding: 20px; background: #FFFFFF; border: 1px solid #E6E3EE; border-radius: 14px;">
+        <input type="radio" name="ctype" style="width: 18px; height: 18px; margin-top: 3px; accent-color: #6D28D9;">
+        <span style="display: flex; flex-direction: column; gap: 4px;"><span style="font-weight: 700; font-size: 17px;">Project campaign</span><span style="font-size: 14px; color: #5C5768; line-height: 20px;">One goal, e.g. a roof repair. 1–5 milestones, RM 100–100,000, 7–90 days. Released after the deadline or once the goal is reached.</span></span>
+      </label>
+      <label style="display: flex; gap: 14px; padding: 20px; background: #F8F5FF; border: 2px solid #6D28D9; border-radius: 14px;">
+        <input type="radio" name="ctype" checked style="width: 18px; height: 18px; margin-top: 3px; accent-color: #6D28D9;">
+        <span style="display: flex; flex-direction: column; gap: 4px;"><span style="font-weight: 700; font-size: 17px;">Weekly operational</span><span style="font-size: 14px; color: #5C5768; line-height: 20px;">Recurring needs like food. 4–12 weeks, same amount each week (RM 100–5,000). Donations stay open; one week is released each release day.</span></span>
+      </label>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+      <section style="flex: 999 1 560px; min-width: 0; background: #FFFFFF; border: 1px solid #E6E3EE; border-radius: 14px; padding: 28px; display: flex; flex-direction: column; gap: 22px;">
+        <h2 style="margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 20px;">Weekly plan</h2>
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px;">
+          <div style="display: flex; flex-direction: column; gap: 6px;"><label for="w-amt" style="font-size: 14px; font-weight: 600;">Weekly amount (RM)</label><input id="w-amt" value="1,080.00" style="height: 44px; padding: 0 12px; border: 1px solid #E6E3EE; border-radius: 8px; font: 600 15px Inter, sans-serif; min-width: 0;"></div>
+          <div style="display: flex; flex-direction: column; gap: 6px;"><label for="w-n" style="font-size: 14px; font-weight: 600;">Weeks</label><input id="w-n" value="8" style="height: 44px; padding: 0 12px; border: 1px solid #E6E3EE; border-radius: 8px; font: 600 15px Inter, sans-serif; min-width: 0;"></div>
+          <div style="display: flex; flex-direction: column; gap: 6px;"><label for="w-day" style="font-size: 14px; font-weight: 600;">Release day</label><select id="w-day" style="height: 44px; padding: 0 10px; border: 1px solid #E6E3EE; border-radius: 8px; font: 500 15px Inter, sans-serif; background: #FFFFFF; min-width: 0;"><option>Monday</option></select></div>
+          <div style="display: flex; flex-direction: column; gap: 6px;"><label for="w-start" style="font-size: 14px; font-weight: 600;">First release</label><input id="w-start" value="01/12/2026" style="height: 44px; padding: 0 12px; border: 1px solid #E6E3EE; border-radius: 8px; font: 500 15px Inter, sans-serif; min-width: 0;"></div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; align-items: baseline;"><span style="font-weight: 600; font-size: 15px; flex-grow: 1;">What one week buys</span><span style="font-size: 13px; color: #5C5768;">Admin compares receipts with this list</span></div>
+          <div style="border: 1px solid #E6E3EE; border-radius: 10px; overflow: hidden;">
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 44px; gap: 10px; padding: 10px 12px; background: #F8F7FB; font-size: 13px; font-weight: 600; color: #5C5768;"><span>Item</span><span>Quantity</span><span>Unit</span><span>Est. price (RM)</span><span></span></div>
+            <sc-for list="{{ items }}" as="i" hint-placeholder-count="5">
+              <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 44px; gap: 10px; padding: 8px 12px; border-top: 1px solid #E6E3EE; align-items: center;">
+                <input aria-label="Item" value="{{ i.name }}" style="height: 38px; padding: 0 10px; border: 1px solid #E6E3EE; border-radius: 6px; font: 400 14px Inter, sans-serif; min-width: 0;">
+                <input aria-label="Quantity" value="{{ i.qty }}" style="height: 38px; padding: 0 10px; border: 1px solid #E6E3EE; border-radius: 6px; font: 400 14px Inter, sans-serif; min-width: 0;">
+                <input aria-label="Unit" value="{{ i.unit }}" style="height: 38px; padding: 0 10px; border: 1px solid #E6E3EE; border-radius: 6px; font: 400 14px Inter, sans-serif; min-width: 0;">
+                <input aria-label="Estimated price" value="{{ i.price }}" style="height: 38px; padding: 0 10px; border: 1px solid #E6E3EE; border-radius: 6px; font: 600 14px Inter, sans-serif; min-width: 0;">
+                <button type="button" aria-label="Remove item" style="width: 36px; height: 36px; border: none; border-radius: 6px; background: #F8F7FB; color: #5C5768;">×</button>
+              </div>
+            </sc-for>
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-top: 1px solid #E6E3EE; background: #ECFDF3;">
+              <a href="#" style="font-size: 14px; font-weight: 600; flex-grow: 1;">+ Add item</a>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+              <span style="font-size: 14px; font-weight: 600; color: #14532D;">Items total RM 1,080.00 = weekly amount</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px; padding: 16px; border: 1px dashed #C9C2D9; border-radius: 12px;">
+          <span style="font-size: 13px; font-weight: 600; color: #5C5768;">PROJECT VARIANT · milestone editor</span>
+          <sc-for list="{{ milestones }}" as="m" hint-placeholder-count="3">
+            <div style="display: grid; grid-template-columns: 32px 2fr 1fr 1fr; gap: 10px; align-items: center; font-size: 14px;">
+              <span style="width: 28px; height: 28px; border-radius: 50%; background: #F3EEFF; color: #5B21B6; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px;">{{ m.n }}</span>
+              <span>{{ m.title }}</span><span style="font-weight: 600;">{{ m.amount }}</span><span style="color: #5C5768;">{{ m.date }}</span>
+            </div>
+          </sc-for>
+          <span style="display: flex; gap: 8px; align-items: center; font-size: 14px; color: #7F1D1D; padding: 10px 12px; border-radius: 8px; background: #FEF2F2;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B91C1C" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+            Milestones add up to RM 28,500 but the goal is RM 30,000. Adjust by RM 1,500.
+          </span>
+        </div>
+
+        <div style="display: flex; gap: 12px; justify-content: flex-end; padding-top: 16px; border-top: 1px solid #E6E3EE;">
+          <button type="button" style="height: 44px; padding: 0 18px; border: 1px solid #E6E3EE; border-radius: 8px; background: #FFFFFF; font: 600 15px Inter, sans-serif; color: #17141F;">Back</button>
+          <button type="button" style="height: 44px; padding: 0 18px; border: none; border-radius: 8px; background: #6D28D9; color: #FFFFFF; font: 600 15px Inter, sans-serif;">Next: Documents</button>
+        </div>
+      </section>
+
+      <aside style="flex: 1 1 280px; max-width: 340px; background: #FFFFFF; border: 1px solid #E6E3EE; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-weight: 600;">Schedule preview</span>
+        <span style="font-size: 14px; color: #5C5768;">Total goal RM 8,640.00 · converted to ETH when the admin approves</span>
+        <sc-for list="{{ schedule }}" as="s" hint-placeholder-count="8">
+          <div style="display: flex; font-size: 14px; padding: 6px 0; border-bottom: 1px solid #F0EEF4;"><span style="flex-grow: 1;">{{ s.w }}</span><span style="color: #5C5768;">{{ s.d }}</span></div>
+        </sc-for>
+        <span style="font-size: 13px; color: #5C5768; line-height: 19px;">A week with too little in escrow on its release day is skipped and its money carries forward. Leftover funds at the end are refundable to donors.</span>
+      </aside>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1600}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const dates = ['Mon 1 Dec', 'Mon 8 Dec', 'Mon 15 Dec', 'Mon 22 Dec', 'Mon 29 Dec', 'Mon 5 Jan', 'Mon 12 Jan', 'Mon 19 Jan'];
+    return {
+      items: [
+        { name: 'Rice (10 kg bags)', qty: '5', unit: 'bag', price: '190.00' },
+        { name: 'Cooking oil (5 kg)', qty: '3', unit: 'bottle', price: '90.00' },
+        { name: 'Fresh fish and chicken', qty: '1', unit: 'lot', price: '420.00' },
+        { name: 'Vegetables and eggs', qty: '1', unit: 'lot', price: '260.00' },
+        { name: 'Drinking water (19 L)', qty: '12', unit: 'refill', price: '120.00' }
+      ],
+      milestones: [
+        { n: '1', title: 'Remove old roof sheets', amount: 'RM 8,500', date: 'by 15 Jan' },
+        { n: '2', title: 'New roof and gutters', amount: 'RM 15,000', date: 'by 15 Feb' },
+        { n: '3', title: 'Ceiling and paint', amount: 'RM 5,000', date: 'by 1 Mar' }
+      ],
+      schedule: dates.map((d, i) => ({ w: 'Week ' + (i + 1), d: d }))
+    };
+  }
+}
+</script>
+</body>
+</html>

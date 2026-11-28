@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mobile views</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#6D28D9}a:hover{color:#5B21B6}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1000px; box-sizing: border-box; padding: 60px 80px; background: #EFECF5; font-family: Inter, system-ui, sans-serif; color: #17141F; font-variant-numeric: tabular-nums; display: flex; justify-content: space-between; align-items: flex-start;">
+
+  <div style="display: flex; flex-direction: column; gap: 14px; align-items: center;">
+    <span style="font-size: 14px; font-weight: 600; color: #5C5768;">Browse</span>
+    <div style="width: 390px; height: 844px; border-radius: 36px; background: #FFFFFF; overflow: hidden; box-shadow: 0 20px 50px rgba(23,20,31,.18); display: flex; flex-direction: column;">
+      <div style="padding: 20px 20px 12px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #E6E3EE;">
+        <span style="width: 30px; height: 30px; border-radius: 8px; background: #6D28D9;"></span>
+        <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 18px; flex-grow: 1;">CrowdChain</span>
+        <button type="button" aria-label="Open menu" style="width: 44px; height: 44px; border: none; background: #F8F7FB; border-radius: 10px; display: flex; align-items: center; justify-content: center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#17141F" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      </div>
+      <div style="padding: 16px 20px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 12px; border: 1px solid #E6E3EE; border-radius: 10px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C5768" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <span style="font-size: 15px; color: #5C5768;">Search campaigns</span>
+        </div>
+        <div style="display: flex; gap: 8px; overflow: hidden;">
+          <span style="height: 34px; padding: 0 12px; border-radius: 999px; background: #6D28D9; color: #FFFFFF; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; white-space: nowrap;">All</span>
+          <span style="height: 34px; padding: 0 12px; border-radius: 999px; border: 1px solid #E6E3EE; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; white-space: nowrap;">Weekly</span>
+          <span style="height: 34px; padding: 0 12px; border-radius: 999px; border: 1px solid #E6E3EE; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; white-space: nowrap;">Food</span>
+          <span style="height: 34px; padding: 0 12px; border-radius: 999px; border: 1px solid #E6E3EE; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; white-space: nowrap;">Filters</span>
+        </div>
+        <sc-for list="{{ cards }}" as="c" hint-placeholder-count="3">
+          <div style="border: 1px solid #E6E3EE; border-radius: 14px; overflow: hidden;">
+            <div style="height: 96px; background: {{ c.img }};"></div>
+            <div style="padding: 12px 14px; display: flex; flex-direction: column; gap: 8px;">
+              <span style="font-size: 12px; color: #5C5768;">{{ c.org }}</span>
+              <span style="font-weight: 600; font-size: 15px; line-height: 20px;">{{ c.title }}</span>
+              <div style="height: 6px; border-radius: 999px; background: #EFECF5; overflow: hidden;"><div style="height: 6px; width: {{ c.pct }}; background: #6D28D9;"></div></div>
+              <div style="display: flex; font-size: 13px;"><span style="font-weight: 600; flex-grow: 1;">{{ c.raised }}</span><span style="color: {{ c.riskFg }}; font-weight: 600;">{{ c.score }} · {{ c.risk }}</span></div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 14px; align-items: center;">
+    <span style="font-size: 14px; font-weight: 600; color: #5C5768;">Campaign detail</span>
+    <div style="width: 390px; height: 844px; border-radius: 36px; background: #FFFFFF; overflow: hidden; box-shadow: 0 20px 50px rgba(23,20,31,.18); display: flex; flex-direction: column; position: relative;">
+      <div style="height: 200px; background: #E9DFFC; flex-shrink: 0;"></div>
+      <div style="padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1;">
+        <span style="align-self: flex-start; height: 24px; padding: 0 9px; border-radius: 999px; background: #F3EEFF; color: #5B21B6; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center;">Weekly operational</span>
+        <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 22px; line-height: 28px;">Weekly food fund for 60 tahfiz students</span>
+        <span style="font-size: 13px; color: #5C5768;">Maahad Tahfiz Al-Ikhlas · MAIN Perak · verified</span>
+        <div style="display: flex; align-items: baseline; gap: 8px;"><span style="font-weight: 700; font-size: 22px;">≈ RM 2,700</span><span style="font-size: 13px; color: #5C5768;">of RM 8,640</span></div>
+        <div style="height: 8px; border-radius: 999px; background: #EFECF5; overflow: hidden;"><div style="height: 8px; width: 31%; background: #6D28D9;"></div></div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid #E6E3EE; border-radius: 12px;">
+          <span style="width: 44px; height: 44px; border-radius: 10px; background: #ECFDF3; color: #15803D; display: flex; align-items: center; justify-content: center; font: 800 17px 'Plus Jakarta Sans', sans-serif;">92</span>
+          <span style="display: flex; flex-direction: column; flex-grow: 1;"><span style="font-weight: 600; font-size: 14px;">Trust Score · Low risk</span><span style="font-size: 12px; color: #5C5768;">3 of 3 weeks proven on time</span></span>
+          <span style="font-size: 18px; color: #5C5768;" aria-hidden="true">›</span>
+        </div>
+        <div style="display: flex; border-bottom: 1px solid #E6E3EE; font-size: 14px; font-weight: 600;">
+          <span style="padding: 10px 0; margin-right: 20px; border-bottom: 2px solid #6D28D9; color: #6D28D9;">Weeks</span>
+          <span style="padding: 10px 0; margin-right: 20px; color: #5C5768;">About</span>
+          <span style="padding: 10px 0; color: #5C5768;">Timeline</span>
+        </div>
+        <sc-for list="{{ weeks }}" as="w" hint-placeholder-count="3">
+          <div style="display: flex; align-items: center; gap: 10px; font-size: 14px;">
+            <span style="width: 26px; height: 26px; border-radius: 50%; background: {{ w.bg }}; color: {{ w.fg }}; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px;">{{ w.n }}</span>
+            <span style="flex-grow: 1;">{{ w.title }}</span>
+            <span style="font-weight: 600; color: {{ w.statusFg }};">{{ w.status }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="padding: 14px 20px 26px; border-top: 1px solid #E6E3EE; background: #FFFFFF;">
+        <a href="#" style="height: 50px; border-radius: 12px; background: #6D28D9; color: #FFFFFF; text-decoration: none; font-weight: 600; font-size: 16px; display: flex; align-items: center; justify-content: center;">Donate</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 14px; align-items: center;">
+    <span style="font-size: 14px; font-weight: 600; color: #5C5768;">Donate sheet</span>
+    <div style="width: 390px; height: 844px; border-radius: 36px; background: #4A4356; overflow: hidden; box-shadow: 0 20px 50px rgba(23,20,31,.18); display: flex; flex-direction: column; justify-content: flex-end;">
+      <div style="background: #FFFFFF; border-radius: 22px 22px 0 0; padding: 12px 20px 28px; display: flex; flex-direction: column; gap: 16px;">
+        <span style="align-self: center; width: 40px; height: 5px; border-radius: 999px; background: #D4CFDF;"></span>
+        <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 20px;">Donate</span>
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;">
+          <span style="height: 44px; border-radius: 10px; border: 1px solid #E6E3EE; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px;">RM 20</span>
+          <span style="height: 44px; border-radius: 10px; border: 2px solid #6D28D9; background: #F3EEFF; color: #5B21B6; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px;">RM 50</span>
+          <span style="height: 44px; border-radius: 10px; border: 1px solid #E6E3EE; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px;">RM 100</span>
+          <span style="height: 44px; border-radius: 10px; border: 1px solid #E6E3EE; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px;">RM 200</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <label for="m-amt" style="font-size: 14px; font-weight: 600;">Amount (RM)</label>
+          <input id="m-amt" value="50.00" style="height: 50px; padding: 0 14px; border: 1px solid #E6E3EE; border-radius: 10px; font: 600 18px Inter, sans-serif;">
+          <span style="font-size: 13px; color: #5C5768;">≈ 0.00463 ETH</span>
+        </div>
+        <label style="display: flex; align-items: center; gap: 10px; font-size: 14px;"><input type="checkbox" style="width: 20px; height: 20px; accent-color: #6D28D9;">Donate anonymously</label>
+        <div style="padding: 12px; border-radius: 10px; background: #FFF7ED; font-size: 13px; color: #7C2D12;">On mobile, open this page inside the MetaMask app browser to sign.</div>
+        <a href="#" style="height: 52px; border-radius: 12px; background: #6D28D9; color: #FFFFFF; text-decoration: none; font-weight: 600; font-size: 16px; display: flex; align-items: center; justify-content: center;">Continue in MetaMask</a>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      cards: [
+        { img: '#E9DFFC', org: 'Maahad Tahfiz Al-Ikhlas · Perak', title: 'Weekly food fund for 60 tahfiz students', pct: '31%', raised: '≈ RM 2,700', score: '92', risk: 'Low', riskFg: '#15803D' },
+        { img: '#DFF3E8', org: 'Rumah Anak Yatim Nur Iman · Kedah', title: 'Groceries and milk for 35 children', pct: '54%', raised: '≈ RM 3,240', score: '81', risk: 'Low', riskFg: '#15803D' },
+        { img: '#FCE8D8', org: 'Seri Damai Elderly Care · Johor', title: 'Monthly food stock for 22 residents', pct: '9%', raised: '≈ RM 450', score: '64', risk: 'Medium', riskFg: '#B45309' }
+      ],
+      weeks: [
+        { n: '3', title: 'Week 3 · 15 Dec', status: 'Released', bg: '#ECFDF3', fg: '#15803D', statusFg: '#15803D' },
+        { n: '4', title: 'Week 4 · 22 Dec', status: 'Needs 0.05 ETH', bg: '#6D28D9', fg: '#FFFFFF', statusFg: '#5B21B6' },
+        { n: '5', title: 'Week 5 · 29 Dec', status: 'Upcoming', bg: '#F4F4F5', fg: '#52525B', statusFg: '#5C5768' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

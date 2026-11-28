@@ -1,0 +1,39 @@
+{
+  "v": 3,
+  "createdOnFiles": {"v": 1, "at": "2026-11-26T09:00:00Z"},
+  "title": "CrowdChain UI Design",
+  "launch": {"view": "canvas"},
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {"x": 0, "y": 0, "w": 1440, "h": 1760, "title": "Design System", "expand": "fill"},
+    "Landing.dc.html": {"x": 1520, "y": 0, "w": 1440, "h": 2240, "title": "Landing", "expand": "fill"},
+    "Campaigns.dc.html": {"x": 3040, "y": 0, "w": 1440, "h": 1560, "title": "Browse Campaigns", "expand": "fill"},
+    "CampaignDetail.dc.html": {"x": 4560, "y": 0, "w": 1440, "h": 2300, "title": "Campaign Detail", "expand": "fill"},
+
+    "Donate.dc.html": {"x": 0, "y": 2720, "w": 1440, "h": 900, "title": "Donate Flow (interactive)", "is_interactive": true},
+    "AuthWallet.dc.html": {"x": 1520, "y": 2720, "w": 1440, "h": 1100, "title": "Auth & Wallet"},
+    "Mobile.dc.html": {"x": 3040, "y": 2720, "w": 1440, "h": 1000, "title": "Mobile"},
+
+    "OrgVerification.dc.html": {"x": 0, "y": 4240, "w": 1440, "h": 1500, "title": "Fundraiser · Organisation Verification", "expand": "fill"},
+    "CampaignWizard.dc.html": {"x": 1520, "y": 4240, "w": 1440, "h": 1600, "title": "Fundraiser · Create Campaign", "expand": "fill"},
+    "ManageCampaign.dc.html": {"x": 3040, "y": 4240, "w": 1440, "h": 1700, "title": "Fundraiser · Manage Campaign", "expand": "fill"},
+
+    "DonorDashboard.dc.html": {"x": 0, "y": 6360, "w": 1440, "h": 1200, "title": "Donor · My Donations", "expand": "fill"},
+    "AdminPending.dc.html": {"x": 1520, "y": 6360, "w": 1440, "h": 1200, "title": "Admin · Pending Actions", "expand": "fill"},
+    "AdminReview.dc.html": {"x": 3040, "y": 6360, "w": 1440, "h": 1400, "title": "Admin · Review Proof & Release", "expand": "fill"},
+    "AdminUsers.dc.html": {"x": 4560, "y": 6360, "w": 1440, "h": 1200, "title": "Admin · Users & Audit Log", "expand": "fill"}
+  },
+  "order": [
+    "Main.dc.html", "Landing.dc.html", "Campaigns.dc.html", "CampaignDetail.dc.html",
+    "Donate.dc.html", "AuthWallet.dc.html", "Mobile.dc.html",
+    "OrgVerification.dc.html", "CampaignWizard.dc.html", "ManageCampaign.dc.html",
+    "DonorDashboard.dc.html", "AdminPending.dc.html", "AdminReview.dc.html", "AdminUsers.dc.html"
+  ],
+  "notes": {
+    "row1": {"x": 0, "y": -300, "text": "Design system & public pages", "kind": "title1", "maxW": 6000},
+    "row2": {"x": 0, "y": 2420, "text": "Donation flow, auth & mobile", "kind": "title1", "maxW": 4480},
+    "row3": {"x": 0, "y": 3940, "text": "Fundraiser", "kind": "title1", "maxW": 4480},
+    "row4": {"x": 0, "y": 6060, "text": "Donor & Admin", "kind": "title1", "maxW": 6000}
+  },
+  "designSystems": []
+}
