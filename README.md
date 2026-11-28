@@ -40,7 +40,9 @@ composer install
 copy .env.example .env
 ```
 
-3. Open `.env` and set a password for the local database, for example `DB_PASSWORD=crowdchain_local`. Then generate the app key:
+3. Open `.env` and set a password for the local database, for example `DB_PASSWORD=crowdchain_local`.
+   **If Laragon's own PostgreSQL is running, it already uses port 5432**, so also set `DB_PORT=5433`
+   (Docker and Laravel both read this value). Then generate the app key:
 
 ```bash
 php artisan key:generate
