@@ -48,7 +48,7 @@
 | FR-CC-12 | Allow a donor with a verified email and a linked wallet to donate by entering an RM amount (minimum ≈RM 5, maximum = the remaining goal for a Project or the remaining total for a Weekly campaign). Show the ETH equivalent, call `donate()` through MetaMask, then submit the `txHash` for backend verification. | M | D-01, D-29, D-40 |
 | FR-CC-13 | Allow the donor to choose **Donate anonymously**, which hides their name in the public feed. | S | D-37 |
 | FR-CC-14 | Close a Project Campaign to donations as soon as the goal is reached (status **Funded**). | M | D-27 |
-| FR-CC-15 | Allow a fundraiser to request **one 30-day extension** before the deadline when the goal has not been reached. The admin approves or rejects it. On approval, the admin's MetaMask calls `extendDeadline()`. | M | D-24 |
+| FR-CC-15 | Allow a fundraiser to request, for a **Project Campaign** only (D-59), **one 30-day extension** before the deadline when the goal has not been reached. The admin approves or rejects it. On approval, the admin's MetaMask calls `extendDeadline()`. | M | D-24 |
 | FR-CC-16 | Allow a donor to view their donation history with campaign, amount (ETH + ≈RM at donation time), date, status, refund eligibility, and an Etherscan link. | M | P1 |
 | FR-CC-17 | Allow a fundraiser to view their campaigns with status, amount raised, stage status and pending actions. | M | — |
 | FR-CC-18 | Provide an ETH→MYR rate endpoint backed by CoinGecko, cached for 10 minutes, that falls back to the last cached rate. | M | D-41 |

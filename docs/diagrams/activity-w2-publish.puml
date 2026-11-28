@@ -1,0 +1,39 @@
+@startuml activity-w2-publish
+title W2 — Campaign Publication
+skinparam shadowing false
+|Fundraiser|
+start
+:Choose type (Project / Weekly);
+if (Project?) then (yes)
+  :Enter goal (RM), duration,\n1–5 milestones (sum = goal);
+else (Weekly)
+  :Enter weekly amount, weeks,\nrelease weekday, start date,\nitem list (sum = weekly amount);
+endif
+:Upload images & supporting documents;
+|System|
+if (Org verified, not expired,\nwallet linked, within active limit?) then (yes)
+else (no)
+  :Block submission\nwith reason;
+  stop
+endif
+|Fundraiser|
+:Submit for review;
+|System|
+:status = pending_review;\nnotify Admin;
+|Admin|
+:Review content, stages,\ndocuments;
+if (Approve?) then (yes)
+  |System|
+  :Convert RM -> wei at current rate\n(last stage absorbs rounding);\nprepare createCampaign params;
+  |Admin|
+  :Sign createCampaign() in MetaMask;
+  |Ethereum|
+  :Store campaign;\nemit CampaignCreated;
+  |System|
+  :Verify receipt & event;\nstatus = active; save snapshots;\naudit log; notify Fundraiser;
+else (no)
+  |System|
+  :status = rejected (reason);\nnotify Fundraiser;
+endif
+stop
+@enduml

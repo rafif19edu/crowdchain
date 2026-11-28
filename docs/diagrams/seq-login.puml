@@ -1,0 +1,28 @@
+@startuml seq-login
+title Login — Sanctum SPA cookie + CSRF
+skinparam shadowing false
+actor User
+participant "React SPA" as SPA
+participant "Laravel API" as API
+database "PostgreSQL\n(sessions)" as DB
+
+User -> SPA : open app
+SPA -> API : GET /sanctum/csrf-cookie
+API --> SPA : Set-Cookie: XSRF-TOKEN (readable),\nlaravel_session (HttpOnly)
+User -> SPA : email + password
+SPA -> API : POST /api/v1/auth/login\nHeader X-XSRF-TOKEN\n(cookie sent automatically)
+API -> API : throttle 5/min (email+IP)\nverify CSRF
+API -> DB : find user; check bcrypt hash;\ncheck status != suspended
+alt credentials valid
+  API -> DB : regenerate session id;\nstore user id in session
+  API --> SPA : 200 {data: user}\nSet-Cookie: new laravel_session
+  SPA -> SPA : store user in TanStack Query cache;\nredirect by role
+else invalid / suspended
+  API --> SPA : 422 / 403 message
+end
+
+== Later requests ==
+SPA -> API : GET /api/v1/... (cookie + X-XSRF-TOKEN)
+API -> API : auth:sanctum resolves user from session\n-> role middleware -> Policy
+API --> SPA : 200 / 401 / 403
+@enduml

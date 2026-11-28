@@ -1,0 +1,35 @@
+@startuml campaign-state
+title Campaign Status (database)
+skinparam shadowing false
+hide empty description
+
+[*] --> draft : fundraiser creates
+draft --> pending_review : submit
+pending_review --> rejected : admin rejects (reason)
+rejected --> pending_review : edit & resubmit
+pending_review --> active : admin approves\n+ createCampaign tx verified
+
+active --> funded : [project] goal reached\nor deadline with raised >= M1
+active --> refunding : [project] deadline with raised < M1
+active --> completed : [weekly] last week processed\nand last proof approved
+active --> under_review : organisation expired\nor fundraiser suspended
+active --> cancelled : admin cancels
+
+funded --> completed : all fundable stages released\nand proven
+funded --> under_review : organisation expired\nor fundraiser suspended
+funded --> cancelled : admin cancels
+
+under_review --> active : admin restores
+under_review --> funded : admin restores
+under_review --> cancelled : admin cancels
+
+refunding --> [*]
+completed --> [*]
+cancelled --> [*]
+
+note right of completed
+  If a refund pool remains
+  (unfunded leftover), donors
+  can still claim refunds.
+end note
+@enduml

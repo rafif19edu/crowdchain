@@ -1,0 +1,46 @@
+@startuml component
+title CrowdChain — Component Diagram
+skinparam componentStyle rectangle
+skinparam shadowing false
+
+actor "Donor / Fundraiser / Admin" as User
+
+node "Browser" {
+  component "React SPA\n(TypeScript, shadcn/ui,\nTanStack Query)" as SPA
+  component "Web3 module\n(Ethers.js)" as W3
+  component "MetaMask\nextension" as MM
+}
+
+node "Heroku app" {
+  component "Laravel REST API\n/api/v1" as API
+  component "Chain Reader\n(read-only RPC)" as CR
+  component "Scheduler commands\nchain:sync, trust:recalculate, ..." as SCH
+  database "PostgreSQL" as DB
+}
+
+cloud "Ethereum Sepolia" {
+  component "CrowdChainEscrow\n(smart contract)" as SC
+}
+
+cloud "External services" {
+  component "RPC provider\n(Alchemy/Infura)" as RPC
+  component "Cloudflare R2\n(files)" as R2
+  component "CoinGecko\n(ETH/MYR)" as CG
+  component "Brevo\n(SMTP)" as MAIL
+}
+
+User --> SPA
+SPA --> API : HTTPS JSON\n(Sanctum cookie + CSRF)
+SPA --> W3
+W3 --> MM : request signature /\ntransaction
+MM --> SC : signed transactions
+API --> DB
+API --> CR
+SCH --> CR
+SCH --> DB
+CR --> RPC
+RPC --> SC : read receipts\n& events
+API --> R2 : upload /\nsigned URLs
+API --> CG : rate (cached)
+API --> MAIL
+@enduml

@@ -1,0 +1,31 @@
+@startuml contract-state
+title CrowdChainEscrow — Campaign State (on-chain)
+skinparam shadowing false
+hide empty description
+
+[*] --> Active : createCampaign()\n[onlyOwner]
+
+state Active {
+  Active : donate() accepted until deadline
+  Active : weekly: releaseStage() / markUnfunded()\n  per scheduled week
+}
+
+Active --> Funded : [project] donate() makes raised == goal
+Active --> Funded : [project] finalize() after deadline,\nraised >= M1 (later stages may be Unfunded,\nleftover -> refundPool)
+Active --> Refunding : [project] finalize() after deadline,\nraised < M1 (refundPool = raised)
+Active --> Completed : [weekly] last week processed\n& no proof outstanding\n(leftover -> refundPool)
+Active --> Cancelled : cancelCampaign()\n(refundPool = raised - released)
+
+Funded --> Completed : last fundable stage released\n& recordProof()
+Funded --> Cancelled : cancelCampaign()
+
+Refunding --> [*]
+Completed --> [*]
+Cancelled --> [*]
+
+note bottom of Cancelled
+  claimRefund() works in any state
+  while the caller's share of
+  refundPool is not yet fully paid.
+end note
+@enduml

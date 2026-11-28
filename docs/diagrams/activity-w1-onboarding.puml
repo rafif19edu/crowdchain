@@ -1,0 +1,33 @@
+@startuml activity-w1-onboarding
+title W1 — Fundraiser Onboarding
+skinparam shadowing false
+|Fundraiser|
+start
+:Register (role = Fundraiser);
+|System|
+:Create account;\nsend verification email;
+|Fundraiser|
+:Click email link;
+:Link MetaMask wallet\n(sign nonce);
+|System|
+if (Signature valid &\nwallet not used?) then (yes)
+  :Save wallet address;
+else (no)
+  :Show error;
+  stop
+endif
+|Fundraiser|
+repeat
+  :Fill organisation, bank & PIC details;\nupload certificate, bank proof,\nPIC letter, premises photos;
+  |System|
+  :Validate input & files;\nstore files privately (R2) + SHA-256;\nstatus = pending;\nnotify Admin;
+  |Admin|
+  :Review documents\n(signed URLs);
+  backward:Edit & resubmit;
+repeat while (Approve?) is (no: reject with reason) not (yes)
+|System|
+:status = verified;\naudit log; notify Fundraiser;
+|Fundraiser|
+:Can create campaigns;
+stop
+@enduml

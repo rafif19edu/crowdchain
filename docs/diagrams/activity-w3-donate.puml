@@ -1,0 +1,37 @@
+@startuml activity-w3-donate
+title W3 — Donation
+skinparam shadowing false
+|Donor|
+start
+:Open campaign page;
+if (Logged in, email verified,\nwallet linked?) then (yes)
+else (no)
+  :Prompt login / verification /\nwallet linking;
+  stop
+endif
+:Enter amount (RM),\noptional "Donate anonymously";
+|System|
+:Convert to ETH (cached rate);\ncheck min ≈RM5 and max = remaining;
+|Donor|
+:Confirm in MetaMask\n(donate, value = ETH);
+|Ethereum|
+if (Active, before deadline,\nraised + value <= goal?) then (yes)
+  :Hold ETH in escrow;\nemit DonationReceived;
+else (no)
+  :Revert;
+  |Donor|
+  :See plain-English error;
+  stop
+endif
+|Donor|
+:Wait 1 confirmation;\nSPA posts txHash;
+|System|
+:Verify receipt, contract, event,\nsender = linked wallet;
+:Store donation (idempotent);\nupdate raised; recalc Trust Score;
+if (Project goal reached?) then (yes)
+  :status = funded;
+endif
+|Donor|
+:See success + Etherscan link;
+stop
+@enduml

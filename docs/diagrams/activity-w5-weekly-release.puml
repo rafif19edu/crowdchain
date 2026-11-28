@@ -1,0 +1,41 @@
+@startuml activity-w5-weekly-release
+title W5 — Weekly Operational Release
+skinparam shadowing false
+|Scheduler|
+start
+repeat :Daily: find weeks whose\nscheduled date has arrived;
+  |System|
+  :Add week N to Pending Actions;
+  |Admin|
+  :Open week N;
+  if (Escrow balance >= weekly amount\nAND week N-1 proof approved?) then (yes)
+    :Sign releaseStage(id, N);
+    |Ethereum|
+    :Pay weekly amount to fundraiser;\nemit StageReleased;
+    |System|
+    :week N = released; notify;
+    |Fundraiser|
+    :Buy items; upload receipt\n+ transfer slip;
+    |Admin|
+    :Review & sign recordProof;
+  else (balance insufficient)
+    :Sign markUnfunded(id, N);
+    |Ethereum|
+    :Skip week; funds carry forward;\nemit StageUnfunded;
+    |System|
+    :week N = unfunded; notify;
+  endif
+  |Scheduler|
+repeat while (More weeks?) is (yes)
+->no;
+|Ethereum|
+:Leftover balance -> refund pool;
+|System|
+:status = completed;\nnotify donors if refund available;
+stop
+note right
+  If proof for week N-1 is still pending,
+  week N waits in Pending Actions
+  (release is blocked by the contract).
+end note
+@enduml
